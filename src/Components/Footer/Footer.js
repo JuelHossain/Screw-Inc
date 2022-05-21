@@ -1,10 +1,11 @@
 import { Construction, Facebook, HailSharp, LocalHospitalSharp, PanToolAltSharp, Twitter, YouTube } from '@mui/icons-material';
 import { Box, Container, Grid, Link, Paper, Stack, Typography } from '@mui/material';
 import React from 'react';
+import Copyright from './CopyRight';
 
 const Footer = () => {
     return (
-      <footer>
+      <footer className="fixed left-0 right-0 bottom-0">
         <Box variant="outlined" bgcolor="primary.main" p={3} color="aliceblue">
           <Container maxWidth="xl">
             <Grid container>
@@ -38,6 +39,7 @@ const Footer = () => {
                     <Facebook sx={{ color: "skyblue" }} />{" "}
                   </Link>
                 </Stack>
+                  <Copyright sx={{ mt:2,color:'aliceBlue',textAlign:'left' }} />
               </Grid>
             </Grid>
           </Container>
