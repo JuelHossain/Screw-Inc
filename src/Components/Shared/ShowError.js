@@ -2,9 +2,11 @@ import { Close, Error } from '@mui/icons-material';
 import {Box, Collapse, IconButton } from '@mui/material';
 import React from 'react';
 
-const ShowError = ({open,setOpen,error}) => {
+const ShowError = ({open,setOpen,error,...props}) => {
     return (
-      <Collapse in={open}>
+      <Collapse
+        {...props}
+        in={open}>
         <Box
                 sx={{
               textTransform:'capitalize',

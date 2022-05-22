@@ -1,11 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Copyright from "../../Components/Footer/CopyRight";
 import { useForm } from "react-hook-form";
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import auth from "../../firebase";
 import {
-  Avatar,
   Box,
   Button,
   Checkbox,
@@ -14,7 +13,6 @@ import {
   FormControlLabel,
   Grid,
   Stack,
-  Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import ShowError from "../../Components/Shared/ShowError";
@@ -22,6 +20,9 @@ import Fly from "../../Components/Shared/Modal";
 import EmailInput from "../../Components/Shared/InputFilelds/EmailInput";
 import PasswordInput from "../../Components/Shared/InputFilelds/PasswordInput";
 import { Google } from "@mui/icons-material";
+import FormTitle from "../../Components/Shared/InputFilelds/FormTitle";
+import { LoadingButton } from "@mui/lab";
+import Toast from "../../Components/Shared/Alert";
 
 //login Page Component
 export default function Login() {
@@ -33,11 +34,11 @@ export default function Login() {
   } = useForm();
 
   // react firebase hooks
-  // 1
+  // 1 signing in with email and password
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
-  // 2
-  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+  // 2 signing in with google 
+  const [signInWithGoogle, gUser, gLoading] = useSignInWithGoogle(auth);
 
   //handle onsubmit
   const onSubmit = (data) => {
@@ -45,17 +46,27 @@ export default function Login() {
     signInWithEmailAndPassword(email, password);
   };
 
-  // alert open
+  // show error state
   const [open, setOpen] = useState(false);
-  //modal open
+  //reset password modal state
   const [modalOpen, setModalOpen] = useState(false);
-
-  //set open true
+  // show confirmation message of reset email 
+    const [alert, setAlert] = useState(false);
+  // navigating user to location he came from 
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || '/';
   useEffect(() => {
+    if (user || gUser) {
+      navigate(from,{replace:true});
+    }
     if (error) {
       setOpen(true);
+      setTimeout(() => {
+        setOpen(false);
+      },3000)
     }
-  }, [error]);
+  }, [user,gUser,error,navigate,from]);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -68,12 +79,7 @@ export default function Login() {
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
+        <FormTitle title={'Login'} icon={<LockOutlinedIcon/>}/>
         <Box
           component="form"
           onSubmit={handleSubmit(onSubmit)}
@@ -99,25 +105,29 @@ export default function Login() {
             {/* show error  */}
             <ShowError open={open} setOpen={setOpen} error={error}></ShowError>
           </Stack>
-
+          
+          {/* show confirmation message */}
+          <Toast open={alert} setOpen={setAlert} message='Reset Email Sent Successfully'/>
           {/* login button  */}
-          <Button
+          <LoadingButton
+            loading={loading}
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 2,mb:1}}
           >
             Sign In
-          </Button>
+          </LoadingButton>
 
           {/* google button  */}
-          <Button
+          <LoadingButton
+            loading={gLoading}
             onClick={()=>signInWithGoogle()}
             fullWidth
             variant="contained"
             sx={{display:'flex',gap:1}}
           > <Google/>  Sign In With Google
-          </Button>
+          </LoadingButton>
 
           <Grid container>
             <Grid item xs>
@@ -130,11 +140,11 @@ export default function Login() {
               >
                 Reset Password ?
               </Button>
-              <Fly modal={modalOpen} setModal={setModalOpen}></Fly>
+              <Fly modal={modalOpen} setModal={setModalOpen} setAlert={setAlert}></Fly>
             </Grid>
             <Grid item>
               <Button size="small" sx={{ textTransform: "initial" }}>
-                <Link to="/register">{"Don't have an account? Sign Up"}</Link>
+                <Link to="/register">{"Don't have an account? Register"}</Link>
               </Button>
             </Grid>
           </Grid>

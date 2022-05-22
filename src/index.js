@@ -9,6 +9,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from 'styled-components';
+import axios from 'axios';
 
 const theme = createTheme({
   palette: {
@@ -42,7 +43,7 @@ const theme = createTheme({
 
  
 
-
+axios.defaults.baseURL = "http://localhost:5000/";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

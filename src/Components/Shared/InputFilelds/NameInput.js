@@ -15,6 +15,7 @@ const NameInput = ({register,errors,name,label,...props}) => {
         autoComplete="given-name"
         fullWidth
         label={label}
+        required
         {...props}
       />
     );

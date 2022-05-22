@@ -1,37 +1,75 @@
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Copyright from "../../Components/Footer/CopyRight";
 import { useForm } from "react-hook-form";
 import FormTitle from "../../Components/Shared/InputFilelds/FormTitle";
 import NameInput from "../../Components/Shared/InputFilelds/NameInput";
 import EmailInput from "../../Components/Shared/InputFilelds/EmailInput";
 import PasswordInput from "../../Components/Shared/InputFilelds/PasswordInput";
-import {Container, Box, Button, Checkbox, CssBaseline, FormControlLabel, Grid, Stack, Typography } from "@mui/material";
-import { useState } from "react";
-import { Google } from "@mui/icons-material";
-import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import {
+  Container,
+  Box,
+  Button,
+  CssBaseline,
+  Grid,
+  Stack,
+} from "@mui/material";
+import { useEffect, useState } from "react";
+import { Google, } from "@mui/icons-material";
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithGoogle,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
 import auth from "../../firebase";
+import ConfirmPasswordInput from "../../Components/Shared/InputFilelds/ConfirmPassword";
+import { LoadingButton } from "@mui/lab";
+import FormControl from "../../Components/Shared/InputFilelds/FormControl";
+import ShowError from "../../Components/Shared/ShowError";
 
 export default function Register() {
-   const [signInWithGoogle, gUser, gLoading, gError] =
-     useSignInWithGoogle(auth);
-  const [agreed, setAgreed] = useState(false);
+  //react firebase hooks
+  // create user 
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+  // create google user
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+  //update profile 
+  const [updateProfile, updating, upError] = useUpdateProfile(auth);
+
+  // terms and conditions agree or not
+  const [agreed, setAgreed] = useState(true);
+
   // react hook form
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
-  } = useForm({ mode: onchange });
-  const onSubmit = (data) => {
-    const firstName = data.firstName;
-    const lastName = data.lastName;
-    const displayName = firstName + lastName;
+    watch,
+    formState: { errors},
+  } = useForm();
+
+  // handle form submit
+  const onSubmit = async (data) => {
+    const displayName = data.firstName +" "+ data.lastName;
     const email = data.email;
     const password = data.password;
-    const confirmPassword = data.confirmPassword;
-    console.log(displayName);
+    await createUserWithEmailAndPassword(email, password, {
+      sendEmailVerification: true,
+    });
+    await updateProfile({displayName});
   };
-
+  //show error state
+  const [open, setOpen] = useState(false);
+ // navigate to the home page after registering
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (user || gUser) {
+      navigate('/');
+      window.location.reload();
+    } else if (error || gError || upError) {
+      setOpen(true);
+    }
+  },[error,gError,user,gUser,upError,navigate])
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -43,7 +81,7 @@ export default function Register() {
           alignItems: "center",
         }}
       >
-        <FormTitle title="Signup" icon={<LockOutlinedIcon />}></FormTitle>
+        <FormTitle title="Register" icon={<LockOutlinedIcon />} />
         <Box
           component="form"
           noValidate
@@ -67,31 +105,33 @@ export default function Register() {
           </Stack>
           <EmailInput register={register} errors={errors} />
           <PasswordInput register={register} errors={errors} />
-          <FormControlLabel
-            control={<Checkbox value="allowExtraEmails" color="primary" />}
-            label={
-              <Typography>
-                I Agree to The{" "}
-                <Link
-                  to={"/termsandconditions"}
-                  className="underline-offset-2 underline"
-                >
-                  Terms And Conditions
-                </Link>
-              </Typography>
-            }
+          <ConfirmPasswordInput
+            register={register}
+            errors={errors}
+            passwordValue={watch("password")}
           />
-
-          <Button
+          <FormControl agreed={agreed} setAgreed={setAgreed} />
+          <ShowError
+            sx={{ justifyContent: "end" }}
+            open={open}
+            setOpen={setOpen}
+            error={error || gError || upError}
+          />
+          {/* sign in button  */}
+          <LoadingButton
+            loading={loading || updating}
+            loadingPosition="end"
+            disabled={agreed}
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
             Sign Up
-          </Button>
+          </LoadingButton>
           {/* google button  */}
-          <Button
+          <LoadingButton
+            loading={gLoading}
             onClick={() => signInWithGoogle()}
             fullWidth
             variant="contained"
@@ -99,11 +139,11 @@ export default function Register() {
           >
             {" "}
             <Google /> Sign In With Google
-          </Button>
+          </LoadingButton>
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Button size="small" sx={{ textTransform: "initial" }}>
-                <Link to="/login">Already have an account? Sign in</Link>
+                <Link to="/login">Already have an account? Login</Link>
               </Button>
             </Grid>
           </Grid>

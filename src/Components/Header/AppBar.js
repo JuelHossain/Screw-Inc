@@ -11,7 +11,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import {  Construction, VerifiedUser } from "@mui/icons-material";
+import {  Construction } from "@mui/icons-material";
 import { NavLink } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase";
@@ -160,7 +160,7 @@ const ResponsiveAppBar = () => {
                   {/* USER IMAGE  */}
                   <Avatar
                     alt={user.displayName}
-                    src={user.photoURL ? user.photoURL : <VerifiedUser />}
+                    src={user.photoURL ? user.photoUrl:''}
                   />
                 </IconButton>
               </Tooltip>
@@ -204,8 +204,8 @@ const ResponsiveAppBar = () => {
             </Box>
           ) : (
             <Box sx={{ flexGrow: 0, display: "flex" }}>
-              <Button sx={{ my: 2, color: "white", display: "block" }}>
-                <NavLink to={"/login"}>Login</NavLink>
+                <Button sx={{ my: 2, color: "white", display: "block" }}>
+                <NavLink to={"/login"}> Login</NavLink>
               </Button>
             </Box>
           )}
