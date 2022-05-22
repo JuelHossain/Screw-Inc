@@ -17,7 +17,7 @@ const Footer = () => {
                   Providing reliable tools since 1992
                 </Typography>
               </Grid>
-              <Grid item xs="5">
+              <Grid item xs={5} sx={{mt:3}}>
                 <Typography
                   fontWeight={900}
                   textTransform={"uppercase"}
@@ -39,7 +39,7 @@ const Footer = () => {
                     <Facebook sx={{ color: "skyblue" }} />{" "}
                   </Link>
                 </Stack>
-                  <Copyright sx={{ mt:2,color:'aliceBlue',textAlign:'left' }} />
+                  <Copyright sx={{ mt:1, color:'aliceBlue',textAlign:'left' }} />
               </Grid>
             </Grid>
           </Container>
