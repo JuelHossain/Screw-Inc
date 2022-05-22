@@ -11,16 +11,19 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { Adb, Construction } from "@mui/icons-material";
+import {  Construction, VerifiedUser } from "@mui/icons-material";
 import { NavLink } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase";
+import Loading from "../Shared/Loading";
+import { signOut } from "firebase/auth";
 // import AdbIcon from "@mui/icons-material/Adb";
 
 const pages = ["Products", "Pricing", "Blog"];
-const userNav= ['Register','Login']
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Profile", "Account", "Dashboard"];
 
 const ResponsiveAppBar = () => {
-  const user = false;
+  const [user,loading] = useAuthState(auth);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -39,6 +42,9 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(null);
   };
 
+  if (loading) {
+  return<Loading></Loading>
+}
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -62,7 +68,7 @@ const ResponsiveAppBar = () => {
               textDecoration: "none",
             }}
           >
-          SCREW
+            SCREW
           </Typography>
           {/* VERTICAL NAVBAR START  */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -77,8 +83,8 @@ const ResponsiveAppBar = () => {
             >
               {/* MENU ICON  */}
               <MenuIcon />
-                      </IconButton>
-                      {/* VERTICAL NAVBAR ITEMS  */}
+            </IconButton>
+            {/* VERTICAL NAVBAR ITEMS  */}
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -96,11 +102,12 @@ const ResponsiveAppBar = () => {
               sx={{
                 display: { xs: "block", md: "none" },
               }}
-                      >
-                          {/* LOOPING THROUGHT NAVBAR ITEMS  */}
+            >
+              {/* LOOPING THROUGH NAVBAR ITEMS  */}
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <NavLink to={`/${page}`}>{page}</NavLink>
+                  <hr className="mr-16" />
                 </MenuItem>
               ))}
             </Menu>
@@ -130,7 +137,7 @@ const ResponsiveAppBar = () => {
           {/* NAVBAR ITEM  */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {/* LOOPING THROUGH NAVBAR ITEMS  */}
-            {pages.map((page) => (
+            {pages.map((page, index) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
@@ -142,46 +149,66 @@ const ResponsiveAppBar = () => {
           </Box>
 
           {/* USER PROFILE  */}
-        {user?<Box sx={{ flexGrow: 0 }}>
-          {/* //TOOLTIP AND THE BUTTON OF USER  */}
-          <Tooltip title="Open settings">
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              {/* USER IMAGE  */}
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-            </IconButton>
-          </Tooltip>
-
-          {/* MENU BAR VERTICAL */}
-          <Menu
-            sx={{ mt: "45px" }}
-            id="menu-appbar"
-            anchorEl={anchorElUser}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            open={Boolean(anchorElUser)}
-            onClose={handleCloseUserMenu}
-          >
-            {settings.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                <NavLink to={setting}>{setting}</NavLink>
-              </MenuItem>
-            ))}
-          </Menu>
-        </Box>:
-          <Box sx={{ flexGrow: 0, display:'flex'}}>
-              <Button
-                sx={{ my: 2, color: "white", display: "block" }}
+          {user ? (
+            <Box sx={{ flexGrow: 0 }}>
+              {user.displayName && (
+                <Button variant="">{user.displayName}</Button>
+              )}
+              {/* //TOOLTIP AND THE BUTTON OF USER  */}
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  {/* USER IMAGE  */}
+                  <Avatar
+                    alt={user.displayName}
+                    src={user.photoURL ? user.photoURL : <VerifiedUser />}
+                  />
+                </IconButton>
+              </Tooltip>
+              {/* MENU BAR VERTICAL */}
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
               >
-                <NavLink to={'/login'}>Login</NavLink>
+                {settings.map((setting) => (
+                  <MenuItem
+                    sx={{ m: 0 }}
+                    key={setting}
+                    onClick={handleCloseUserMenu}
+                  >
+                    <NavLink to={setting}>{setting}</NavLink>
+                    <hr className="ml-20" />
+                  </MenuItem>
+                ))}
+
+                <MenuItem
+                  onClick={() => {
+                    signOut(auth);
+                    handleCloseUserMenu();
+                  }}
+                >
+                  Logout
+                </MenuItem>
+              </Menu>
+            </Box>
+          ) : (
+            <Box sx={{ flexGrow: 0, display: "flex" }}>
+              <Button sx={{ my: 2, color: "white", display: "block" }}>
+                <NavLink to={"/login"}>Login</NavLink>
               </Button>
-          </Box>}
+            </Box>
+          )}
           {/* USER PROFILE ENDED HERE  */}
         </Toolbar>
       </Container>
