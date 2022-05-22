@@ -7,7 +7,7 @@ import { useForm, useFormState } from "react-hook-form";
 import auth from "../../firebase";
 import ShowError from "./ShowError";
 
-const Fly = ({ modal, setModal, setAlert }) => {
+const Fly = ({ modal, setModal, setAlert,email }) => {
   // show firebase error
   const [open, setOpen] = useState(false);
   // react-firebase hooks
@@ -86,6 +86,7 @@ const Fly = ({ modal, setModal, setAlert }) => {
               required
               fullWidth
               label="Email Address"
+              defaultValue={email}
             />
 
             <LoadingButton

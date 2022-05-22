@@ -19,7 +19,7 @@ import ShowError from "../../Components/Shared/ShowError";
 import Fly from "../../Components/Shared/Modal";
 import EmailInput from "../../Components/Shared/InputFilelds/EmailInput";
 import PasswordInput from "../../Components/Shared/InputFilelds/PasswordInput";
-import { Google } from "@mui/icons-material";
+import { Google, Watch } from "@mui/icons-material";
 import FormTitle from "../../Components/Shared/InputFilelds/FormTitle";
 import { LoadingButton } from "@mui/lab";
 import Toast from "../../Components/Shared/Alert";
@@ -30,6 +30,7 @@ export default function Login() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
 
@@ -140,7 +141,7 @@ export default function Login() {
               >
                 Reset Password ?
               </Button>
-              <Fly modal={modalOpen} setModal={setModalOpen} setAlert={setAlert}></Fly>
+              <Fly modal={modalOpen} setModal={setModalOpen} setAlert={setAlert} email={watch('email')}></Fly>
             </Grid>
             <Grid item>
               <Button size="small" sx={{ textTransform: "initial" }}>
