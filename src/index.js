@@ -10,7 +10,20 @@ import "@fontsource/roboto/700.css";
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from 'styled-components';
 import axios from 'axios';
+import { QueryClient, QueryClientProvider } from "react-query";
+ 
+// setting default base url of axios 
+axios.defaults.baseURL = "http://localhost:5000/";
 
+// setting a default auth header to axios 
+axios.defaults.headers.common.Authorization = `Bearer ${
+  localStorage.getItem("accessToken") || "screwincsecretapitoken"
+  }`;
+
+// creating query client of react query 
+const queryClient = new QueryClient();
+
+// creating theme of the app
 const theme = createTheme({
   palette: {
     type: "light",
@@ -40,18 +53,19 @@ const theme = createTheme({
     borderRadius: 4,
   },
 });
-
  
-
-axios.defaults.baseURL = "http://localhost:5000/";
-
+// getting the root of the index.html and injecting our whole app on index html with react
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <App />
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
+
+// thats the end of the application nothing here. be cool be awesome.

@@ -26,6 +26,8 @@ import ConfirmPasswordInput from "../../Components/Shared/InputFilelds/ConfirmPa
 import { LoadingButton } from "@mui/lab";
 import FormControl from "../../Components/Shared/InputFilelds/FormControl";
 import ShowError from "../../Components/Shared/ShowError";
+import useToken from "../../Hooks/useToken";
+import { signOut } from "firebase/auth";
 
 export default function Register() {
   //react firebase hooks
@@ -56,20 +58,28 @@ export default function Register() {
     await createUserWithEmailAndPassword(email, password, {
       sendEmailVerification: true,
     });
-    await updateProfile({displayName});
+    await updateProfile({displayName:displayName});
   };
   //show error state
   const [open, setOpen] = useState(false);
  // navigate to the home page after registering
   const navigate = useNavigate();
+
+  //usetoken 
+   const [isPosted, tError] = useToken(user || gUser);
   useEffect(() => {
-    if (user || gUser) {
+    if (isPosted) {
       navigate('/');
       window.location.reload();
-    } else if (error || gError || upError) {
-      setOpen(true);
+    } else if (error || gError || upError||tError) {
+       setOpen(true);
+       signOut(auth);
+       localStorage.removeItem("accessToken");
+       setTimeout(() => {
+         setOpen(false);
+       }, 3000);
     }
-  },[error,gError,user,gUser,upError,navigate])
+  },[error,gError,user,gUser,upError,navigate,tError,isPosted])
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -115,12 +125,11 @@ export default function Register() {
             sx={{ justifyContent: "end" }}
             open={open}
             setOpen={setOpen}
-            error={error || gError || upError}
+            error={error || gError || upError||tError}
           />
           {/* sign in button  */}
           <LoadingButton
             loading={loading || updating}
-            loadingPosition="end"
             disabled={agreed}
             type="submit"
             fullWidth

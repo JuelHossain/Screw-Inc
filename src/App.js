@@ -9,6 +9,7 @@ import Products from './Pages/Products/Products';
 import RequireAuth from './Pages/Authentication/RequireAuth';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   return (
     <div>

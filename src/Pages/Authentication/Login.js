@@ -19,10 +19,12 @@ import ShowError from "../../Components/Shared/ShowError";
 import Fly from "../../Components/Shared/Modal";
 import EmailInput from "../../Components/Shared/InputFilelds/EmailInput";
 import PasswordInput from "../../Components/Shared/InputFilelds/PasswordInput";
-import { Google, Watch } from "@mui/icons-material";
+import { Google } from "@mui/icons-material";
 import FormTitle from "../../Components/Shared/InputFilelds/FormTitle";
 import { LoadingButton } from "@mui/lab";
 import Toast from "../../Components/Shared/Alert";
+import useToken from "../../Hooks/useToken";
+import { signOut } from "firebase/auth";
 
 //login Page Component
 export default function Login() {
@@ -57,17 +59,20 @@ export default function Login() {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || '/';
+  //usetoken
+  const [isPosted,tError] = useToken(user || gUser);
   useEffect(() => {
-    if (user || gUser) {
+    if (isPosted) {
       navigate(from,{replace:true});
-    }
-    if (error) {
+    } else if (error || tError) {
       setOpen(true);
+      signOut(auth);
+      localStorage.removeItem('accessToken');
       setTimeout(() => {
         setOpen(false);
       },3000)
     }
-  }, [user,gUser,error,navigate,from]);
+  }, [user,gUser,error,navigate,from,tError,isPosted]);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -104,7 +109,7 @@ export default function Login() {
             />
 
             {/* show error  */}
-            <ShowError open={open} setOpen={setOpen} error={error}></ShowError>
+            <ShowError open={open} setOpen={setOpen} error={error||tError}></ShowError>
           </Stack>
           
           {/* show confirmation message */}

@@ -17,7 +17,7 @@ const ShowError = ({open,setOpen,error,...props}) => {
           }}
         >
           <Error />
-          {error?.message.slice(22, -2)}
+          {error?.name==='AxiosError' ? error.message:error?.message?.slice(22, -2)}
           <IconButton
             aria-label="close"
             color="inherit"

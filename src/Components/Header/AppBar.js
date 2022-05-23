@@ -11,7 +11,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import {  Construction } from "@mui/icons-material";
+import { Construction } from "@mui/icons-material";
 import { NavLink } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase";
@@ -23,7 +23,7 @@ const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard"];
 
 const ResponsiveAppBar = () => {
-  const [user,loading] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -43,8 +43,8 @@ const ResponsiveAppBar = () => {
   };
 
   if (loading) {
-  return<Loading></Loading>
-}
+    return <Loading></Loading>;
+  }
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -160,7 +160,7 @@ const ResponsiveAppBar = () => {
                   {/* USER IMAGE  */}
                   <Avatar
                     alt={user.displayName}
-                    src={user.photoURL ? user.photoUrl:''}
+                    src={user.photoURL ? user.photoUrl : ""}
                   />
                 </IconButton>
               </Tooltip>
@@ -195,6 +195,7 @@ const ResponsiveAppBar = () => {
                 <MenuItem
                   onClick={() => {
                     signOut(auth);
+                    localStorage.removeItem("accessToken");
                     handleCloseUserMenu();
                   }}
                 >
@@ -204,7 +205,7 @@ const ResponsiveAppBar = () => {
             </Box>
           ) : (
             <Box sx={{ flexGrow: 0, display: "flex" }}>
-                <Button sx={{ my: 2, color: "white", display: "block" }}>
+              <Button sx={{ my: 2, color: "white", display: "block" }}>
                 <NavLink to={"/login"}> Login</NavLink>
               </Button>
             </Box>
