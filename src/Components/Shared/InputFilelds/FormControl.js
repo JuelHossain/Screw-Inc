@@ -1,8 +1,7 @@
-import { Checkbox, FormControlLabel, Typography } from '@mui/material';
+import { Button, Checkbox, FormControlLabel, Typography } from '@mui/material';
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-const FormControl = ({agreed,setAgreed}) => {
+const FormControl = ({agreed,setAgreed,setTermsOpen}) => {
     return (
       <FormControlLabel
         control={
@@ -16,13 +15,18 @@ const FormControl = ({agreed,setAgreed}) => {
         }
         label={
           <Typography>
-            I Agree to The{" "}
-            <Link
-              to={"/termsandconditions"}
-              className="underline-offset-2 underline"
+            I Agree to The
+            <Button
+              sx={{
+                textDecoration: 'underline',
+                textUnderlineOffset: '2px',
+              }}
+              onClick={() => {
+                setTermsOpen(true);
+              }}
             >
               Terms And Conditions
-            </Link>
+            </Button>
           </Typography>
         }
       />

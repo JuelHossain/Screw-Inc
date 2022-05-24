@@ -28,6 +28,7 @@ import FormControl from "../../Components/Shared/InputFilelds/FormControl";
 import ShowError from "../../Components/Shared/ShowError";
 import useToken from "../../Hooks/useToken";
 import { signOut } from "firebase/auth";
+import Terms from "./Terms";
 
 export default function Register() {
   //react firebase hooks
@@ -63,6 +64,8 @@ export default function Register() {
   };
   //show error state
   const [open, setOpen] = useState(false);
+  //opening terms and conditions
+  const [termsOpen, setTermsOpen] = useState(false);
  // navigate to the home page after registering
   const navigate = useNavigate();
 
@@ -121,7 +124,8 @@ export default function Register() {
             errors={errors}
             passwordValue={watch("password")}
           />
-          <FormControl agreed={agreed} setAgreed={setAgreed} />
+          <FormControl agreed={agreed} setAgreed={setAgreed}setTermsOpen={setTermsOpen} />
+          <Terms open={termsOpen} setOpen={setTermsOpen}/>
           <ShowError
             sx={{ justifyContent: "end" }}
             open={open}
