@@ -12,6 +12,7 @@ import {
   CssBaseline,
   FormControlLabel,
   Grid,
+  Paper,
   Stack,
 } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -80,85 +81,104 @@ export default function Login() {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <FormTitle title={'Login'} icon={<LockOutlinedIcon/>}/>
+      <Paper >
         <Box
-          component="form"
-          onSubmit={handleSubmit(onSubmit)}
-          noValidate
-          sx={{ mt: 1 }}
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
         >
-          {/* input fields  */}
-          <EmailInput register={register} errors={errors} />
-          <PasswordInput register={register} errors={errors} />
-
-          {/* checkbox and firebase error  */}
-          <Stack
-            direction={"row"}
-            justifyContent="space-between"
-            alignItems={"center"}
+          <FormTitle title={"Login"} icon={<LockOutlinedIcon />} />
+          <Box
+            component="form"
+            onSubmit={handleSubmit(onSubmit)}
+            noValidate
+            sx={{ mt: 1 }}
           >
-            {/* checkbox  */}
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+            {/* input fields  */}
+            <EmailInput register={register} errors={errors} />
+            <PasswordInput register={register} errors={errors} />
+
+            {/* checkbox and firebase error  */}
+            <Stack
+              direction={"row"}
+              justifyContent="space-between"
+              alignItems={"center"}
+            >
+              {/* checkbox  */}
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+
+              {/* show error  */}
+              <ShowError
+                open={open}
+                setOpen={setOpen}
+                error={error || tError}
+              ></ShowError>
+            </Stack>
+
+            {/* show confirmation message */}
+            <Toast
+              open={alert}
+              setOpen={setAlert}
+              message="Reset Email Sent Successfully"
             />
+            {/* login button  */}
+            <LoadingButton
+              loading={loading}
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 2, mb: 1 }}
+            >
+              Sign In
+            </LoadingButton>
 
-            {/* show error  */}
-            <ShowError open={open} setOpen={setOpen} error={error||tError}></ShowError>
-          </Stack>
-          
-          {/* show confirmation message */}
-          <Toast open={alert} setOpen={setAlert} message='Reset Email Sent Successfully'/>
-          {/* login button  */}
-          <LoadingButton
-            loading={loading}
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 2,mb:1}}
-          >
-            Sign In
-          </LoadingButton>
+            {/* google button  */}
+            <LoadingButton
+              loading={gLoading}
+              onClick={() => signInWithGoogle()}
+              fullWidth
+              variant="contained"
+              sx={{ display: "flex", gap: 1 }}
+            >
+              {" "}
+              <Google /> Sign In With Google
+            </LoadingButton>
 
-          {/* google button  */}
-          <LoadingButton
-            loading={gLoading}
-            onClick={()=>signInWithGoogle()}
-            fullWidth
-            variant="contained"
-            sx={{display:'flex',gap:1}}
-          > <Google/>  Sign In With Google
-          </LoadingButton>
-
-          <Grid container>
-            <Grid item xs>
-              <Button
-                onClick={() => {
-                  setModalOpen(true);
-                }}
-                size="small"
-                sx={{ textTransform: "initial" }}
-              >
-                Reset Password ?
-              </Button>
-              <Fly modal={modalOpen} setModal={setModalOpen} setAlert={setAlert} email={watch('email')}></Fly>
+            <Grid container>
+              <Grid item xs>
+                <Button
+                  onClick={() => {
+                    setModalOpen(true);
+                  }}
+                  size="small"
+                  sx={{ textTransform: "initial" }}
+                >
+                  Reset Password ?
+                </Button>
+                <Fly
+                  modal={modalOpen}
+                  setModal={setModalOpen}
+                  setAlert={setAlert}
+                  email={watch("email")}
+                ></Fly>
+              </Grid>
+              <Grid item>
+                <Button size="small" sx={{ textTransform: "initial" }}>
+                  <Link to="/register">
+                    {"Don't have an account? Register"}
+                  </Link>
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Button size="small" sx={{ textTransform: "initial" }}>
-                <Link to="/register">{"Don't have an account? Register"}</Link>
-              </Button>
-            </Grid>
-          </Grid>
+          </Box>
         </Box>
-      </Box>
+      </Paper>
       <Copyright sx={{ mt: 8, mb: 4 }} />
     </Container>
   );
