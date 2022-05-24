@@ -16,9 +16,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 axios.defaults.baseURL = "http://localhost:5000/";
 
 // setting a default auth header to axios 
-axios.defaults.headers.common.Authorization = `Bearer ${
-  localStorage.getItem("accessToken") || "screwincsecretapitoken"
-  }`;
+axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem("accessToken")}`;
 
 // creating query client of react query 
 const queryClient = new QueryClient();

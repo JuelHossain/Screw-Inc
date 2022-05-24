@@ -63,7 +63,10 @@ export default function Login() {
   const [isPosted,tError] = useToken(user || gUser);
   useEffect(() => {
     if (isPosted) {
-      navigate(from,{replace:true});
+            navigate(from, { replace: true });
+       window.location.reload();
+
+     
     } else if (error || tError) {
       setOpen(true);
       signOut(auth);

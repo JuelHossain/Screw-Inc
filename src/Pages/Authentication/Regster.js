@@ -15,7 +15,7 @@ import {
   Stack,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Google, } from "@mui/icons-material";
+import { Google, ResetTv, } from "@mui/icons-material";
 import {
   useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
@@ -47,7 +47,8 @@ export default function Register() {
     register,
     handleSubmit,
     watch,
-    formState: { errors},
+    reset,
+    formState: { errors,isSubmitSuccessful},
   } = useForm();
 
   // handle form submit
@@ -58,7 +59,7 @@ export default function Register() {
     await createUserWithEmailAndPassword(email, password, {
       sendEmailVerification: true,
     });
-    await updateProfile({displayName:displayName});
+      await updateProfile({ displayName,roll:user });
   };
   //show error state
   const [open, setOpen] = useState(false);
@@ -66,7 +67,7 @@ export default function Register() {
   const navigate = useNavigate();
 
   //usetoken 
-   const [isPosted, tError] = useToken(user || gUser);
+   const [isPosted, tError] = useToken(isSubmitSuccessful ? user : gUser);
   useEffect(() => {
     if (isPosted) {
       navigate('/');
@@ -141,7 +142,10 @@ export default function Register() {
           {/* google button  */}
           <LoadingButton
             loading={gLoading}
-            onClick={() => signInWithGoogle()}
+            onClick={() => {
+              reset();
+              signInWithGoogle()
+            }}
             fullWidth
             variant="contained"
             sx={{ display: "flex", gap: 1 }}

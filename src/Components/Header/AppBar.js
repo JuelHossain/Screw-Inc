@@ -20,7 +20,7 @@ import { signOut } from "firebase/auth";
 // import AdbIcon from "@mui/icons-material/Adb";
 
 const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard"];
+const settings = ["Profile", "All Users", "Dashboard"];
 
 const ResponsiveAppBar = () => {
   const [user, loading] = useAuthState(auth);
@@ -137,7 +137,7 @@ const ResponsiveAppBar = () => {
           {/* NAVBAR ITEM  */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {/* LOOPING THROUGH NAVBAR ITEMS  */}
-            {pages.map((page, index) => (
+            {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
@@ -160,7 +160,7 @@ const ResponsiveAppBar = () => {
                   {/* USER IMAGE  */}
                   <Avatar
                     alt={user.displayName}
-                    src={user.photoURL ? user.photoUrl : ""}
+                    src={user.photoURL && user.photoURL}
                   />
                 </IconButton>
               </Tooltip>
@@ -188,7 +188,6 @@ const ResponsiveAppBar = () => {
                     onClick={handleCloseUserMenu}
                   >
                     <NavLink to={setting}>{setting}</NavLink>
-                    <hr className="ml-20" />
                   </MenuItem>
                 ))}
 
