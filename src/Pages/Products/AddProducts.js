@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-
+import addIllu from '../../addproduct.webp'
 const AddProducts = () => {
     const [fetching, setfetching] = useState(false);
     const [upPhoto, setUpPhoto] = useState("");
@@ -46,94 +46,116 @@ const AddProducts = () => {
                 setfetching(false);
                 toast.success('Product Added Successfully')
         }});
-    }
+  }
+  
     return (
-      <Container maxWidth={"xs"}>
-        <Paper
-          sx={{
-            textAlign: "center",
-            p: 2,
-            mt: 8,
-          }}
-        >
-          <Typography fontSize={29} fontWeight="bold" color={"primary"} mb={1}>
-            Add A Product
-          </Typography>
-          <Box component={"form"} onSubmit={handleSubmit(onsubmit)}>
-            <TextField
-              {...register("name", {
-                required: {
-                  value: true,
-                  message: "Name Is Required",
-                },
-              })}
-              fullWidth
-              error={Boolean(errors?.name)}
-              helperText={errors?.name?.message}
-              placeholder="Tools Name"
-              sx={{ mb: 1 }}
-            />
-            <TextField
-              error={Boolean(errors?.price)}
-              helperText={errors?.price?.message}
-              {...register("price", {
-                required: {
-                  value: true,
-                  message: "Price Required",
-                },
-                valueAsNumber: {
-                  value: true,
-                  message: "Only Number is allowed",
-                },
-              })}
-              fullWidth
-              placeholder="Price"
-              sx={{ mb: 1 }}
-            />
-            <TextField
-              {...register("qty", {
-                required: {
-                  value: true,
-                  message: "Quantity Required",
-                },
-                valueAsNumber: {
-                  value: true,
-                  message: "Only Number is allowed",
-                },
-              })}
-              error={Boolean(errors?.qty)}
-              helperText={errors?.qty?.message}
-              fullWidth
-              placeholder="Quantity"
-              sx={{ mb: 1 }}
-            />
-            <TextField
-              {...register("text")}
-              fullWidth
-              placeholder="Short Description"
-              sx={{ mb: 1 }}
-            />
-            <TextField
-              {...register("photo")}
-              fullWidth
-              placeholder="Add Photo"
-              type="file"
-              sx={{ mb: 1 }}
-            />
-            <Divider>Or</Divider>
-            <TextField
-              {...register("photoURL")}
-              fullWidth
-              placeholder="Add A Photo Link"
-              sx={{ mb: 1 }}
-            />
-                    <LoadingButton
-                        loading={fetching}
-                        type="submit" fullWidth variant="contained">
-              Submit
-            </LoadingButton>
-          </Box>
-        </Paper>
+      <Container maxWidth={"xl"}>
+        <Box component={Paper} sx={{ display: {md:'flex'} ,gap:1,p:2,mt:8}}>
+          <Paper
+            sx={{
+              display:{xs:'none',sm:'block'},
+              flex: 1,
+              textAlign: "center",
+              p: 1,
+            }}
+          ><img className='w-full h-full object-cover' src={addIllu} alt="" />
+
+          </Paper>
+          <Paper
+            sx={{
+              flex: 1,
+
+              textAlign: "center",
+              p: 1,
+            }}
+          >
+            <Typography
+              fontSize={29}
+              fontWeight="bold"
+              color={"primary"}
+              mb={1}
+            >
+              Add A Product
+            </Typography>
+            <Box component={"form"} onSubmit={handleSubmit(onsubmit)}>
+              <TextField
+                {...register("name", {
+                  required: {
+                    value: true,
+                    message: "Name Is Required",
+                  },
+                })}
+                fullWidth
+                error={Boolean(errors?.name)}
+                helperText={errors?.name?.message}
+                placeholder="Tools Name"
+                sx={{ mb: 1 }}
+              />
+              <TextField
+                error={Boolean(errors?.price)}
+                helperText={errors?.price?.message}
+                {...register("price", {
+                  required: {
+                    value: true,
+                    message: "Price Required",
+                  },
+                  valueAsNumber: {
+                    value: true,
+                    message: "Only Number is allowed",
+                  },
+                })}
+                fullWidth
+                placeholder="Price"
+                sx={{ mb: 1 }}
+              />
+              <TextField
+                {...register("qty", {
+                  required: {
+                    value: true,
+                    message: "Quantity Required",
+                  },
+                  valueAsNumber: {
+                    value: true,
+                    message: "Only Number is allowed",
+                  },
+                })}
+                error={Boolean(errors?.qty)}
+                helperText={errors?.qty?.message}
+                fullWidth
+                placeholder="Quantity"
+                sx={{ mb: 1 }}
+              />
+              <TextField
+                {...register("text")}
+                fullWidth
+                placeholder="Short Description"
+                sx={{ mb: 1 }}
+              />
+              <TextField
+                {...register("photo")}
+                fullWidth
+                placeholder="Add Photo"
+                type="file"
+                sx={{ mb: 1 }}
+              />
+              <Divider>Or</Divider>
+              <TextField
+                {...register("photoURL")}
+                fullWidth
+                placeholder="Add A Photo Link"
+                sx={{ mb: 1 }}
+              />
+              <LoadingButton
+                loading={fetching}
+                type="submit"
+                fullWidth
+                variant="contained"
+              >
+                Submit
+              </LoadingButton>
+            </Box>
+          </Paper>
+        </Box>
       </Container>
     );
 };

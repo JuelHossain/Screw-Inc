@@ -16,6 +16,9 @@ import DashBoard from './Pages/Admin/DashBoard';
 import Blog from './Pages/Blog/Blog';
 import About from './Pages/About/About';
 import RequireAdmin from './Pages/Authentication/RequireAdmin';
+import EditProduct from './Pages/Products/EditProduct.js';
+import ManageProducts from './Pages/Admin/ManageProducts';
+import ManageOrders from './Pages/Admin/ManageOrders';
 
 
 function App() {
@@ -34,12 +37,13 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         {/* pages  */}
+        <Route path="products" element={<Products />} />
         <Route
-          path="products"
+          path="products/:id"
           element={
-            <RequireAuth>
-              <Products />
-            </RequireAuth>
+            <RequireAdmin>
+              <EditProduct />
+            </RequireAdmin>
           }
         />
         <Route
@@ -68,11 +72,35 @@ function App() {
         >
           <Route
             path="manageusers"
-            element={<RequireAdmin><Users/></RequireAdmin>}
+            element={
+              <RequireAdmin>
+                <Users />
+              </RequireAdmin>
+            }
           />
           <Route
             path="addproduct"
-            element={<RequireAdmin><AddProducts/></RequireAdmin>}
+            element={
+              <RequireAdmin>
+                <AddProducts />
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="manageproducts"
+            element={
+              <RequireAdmin>
+                <ManageProducts />
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="manageorders"
+            element={
+              <RequireAdmin>
+                <ManageOrders />
+              </RequireAdmin>
+            }
           />
         </Route>
       </Routes>

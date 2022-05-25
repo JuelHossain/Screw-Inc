@@ -8,11 +8,12 @@ import Typography from "@mui/material/Typography";
 import { CurrencyBitcoin, PieChartRounded, ProductionQuantityLimits } from "@mui/icons-material";
 import Loading from "./Loading";
 import useAdmin from "../../Hooks/useAdmin";
+import { Link } from "react-router-dom";
 
 export default function ProductCard({ product }) {
     const [admin, adminLoading] = useAdmin();
     console.log(admin);
-    const { name, photoURL, photoUrl, upPhoto, price, qty, text } = product;
+    const { _id,name, photoURL, photoUrl, upPhoto, price, qty, text } = product;
     if (adminLoading) {
         return <Loading/>
     }
@@ -32,7 +33,7 @@ export default function ProductCard({ product }) {
               <Typography variant="body2" color="text.secondary">{ text}</Typography>
       </CardContent>
       <CardActions>
-    {admin?<Button size="small">Manage</Button>:<Button size="small">Order Now</Button>}
+    {admin?<Button component={Link} to={`/products/${_id}`} size="small">Manage</Button>:<Button size="small">Order Now</Button>}
       </CardActions>
     </Card>
   );

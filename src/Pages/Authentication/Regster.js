@@ -13,6 +13,7 @@ import {
   CssBaseline,
   Grid,
   Stack,
+  Paper,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Google, ResetTv, } from "@mui/icons-material";
@@ -87,85 +88,90 @@ export default function Register() {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <FormTitle title="Register" icon={<LockOutlinedIcon />} />
+      <Paper sx={{ p: 1, mt: 8 }}>
         <Box
-          component="form"
-          noValidate
-          onSubmit={handleSubmit(onSubmit)}
-          sx={{ mt: 3 }}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
         >
-          <Stack direction={"row"} spacing={1}>
-            <NameInput
+          <FormTitle title="Register" icon={<LockOutlinedIcon />} />
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit(onSubmit)}
+            sx={{ mt: 3 }}
+          >
+            <Stack direction={"row"} spacing={1}>
+              <NameInput
+                register={register}
+                errors={errors}
+                name="firstName"
+                label="First Name"
+                autoFocus
+              />
+              <NameInput
+                register={register}
+                errors={errors}
+                name="lastName"
+                label="Last Name"
+              />
+            </Stack>
+            <EmailInput register={register} errors={errors} />
+            <PasswordInput register={register} errors={errors} />
+            <ConfirmPasswordInput
               register={register}
               errors={errors}
-              name="firstName"
-              label="First Name"
-              autoFocus
+              passwordValue={watch("password")}
             />
-            <NameInput
-              register={register}
-              errors={errors}
-              name="lastName"
-              label="Last Name"
+            <FormControl
+              agreed={agreed}
+              setAgreed={setAgreed}
+              setTermsOpen={setTermsOpen}
             />
-          </Stack>
-          <EmailInput register={register} errors={errors} />
-          <PasswordInput register={register} errors={errors} />
-          <ConfirmPasswordInput
-            register={register}
-            errors={errors}
-            passwordValue={watch("password")}
-          />
-          <FormControl agreed={agreed} setAgreed={setAgreed}setTermsOpen={setTermsOpen} />
-          <Terms open={termsOpen} setOpen={setTermsOpen}/>
-          <ShowError
-            sx={{ justifyContent: "end" }}
-            open={open}
-            setOpen={setOpen}
-            error={error || gError || upError||tError}
-          />
-          {/* sign in button  */}
-          <LoadingButton
-            loading={loading || updating}
-            disabled={agreed}
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Sign Up
-          </LoadingButton>
-          {/* google button  */}
-          <LoadingButton
-            loading={gLoading}
-            onClick={() => {
-              reset();
-              signInWithGoogle()
-            }}
-            fullWidth
-            variant="contained"
-            sx={{ display: "flex", gap: 1 }}
-          >
-            {" "}
-            <Google /> Sign In With Google
-          </LoadingButton>
-          <Grid container justifyContent="flex-end">
-            <Grid item>
-              <Button size="small" sx={{ textTransform: "initial" }}>
-                <Link to="/login">Already have an account? Login</Link>
-              </Button>
+            <Terms open={termsOpen} setOpen={setTermsOpen} />
+            <ShowError
+              sx={{ justifyContent: "end" }}
+              open={open}
+              setOpen={setOpen}
+              error={error || gError || upError || tError}
+            />
+            {/* sign in button  */}
+            <LoadingButton
+              loading={loading || updating}
+              disabled={agreed}
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign Up
+            </LoadingButton>
+            {/* google button  */}
+            <LoadingButton
+              loading={gLoading}
+              onClick={() => {
+                reset();
+                signInWithGoogle();
+              }}
+              fullWidth
+              variant="contained"
+              sx={{ display: "flex", gap: 1 }}
+            >
+              {" "}
+              <Google /> Sign In With Google
+            </LoadingButton>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Button size="small" sx={{ textTransform: "initial" }}>
+                  <Link to="/login">Already have an account? Login</Link>
+                </Button>
+              </Grid>
             </Grid>
-          </Grid>
+          </Box>
         </Box>
-      </Box>
+      </Paper>
       <Copyright sx={{ mt: 8, mb: 4 }} />
     </Container>
   );

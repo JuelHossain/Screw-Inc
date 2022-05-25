@@ -1,4 +1,4 @@
-import { Add, FormatListBulleted, ManageAccounts, ManageHistory, ProductionQuantityLimits, Reviews, StarHalf, ViewInAr } from '@mui/icons-material';
+import { Add, FormatListBulleted, ManageAccounts,  ProductionQuantityLimits, Reviews, StarHalf, ViewInAr } from '@mui/icons-material';
 import { List} from '@mui/material';
 import React from 'react';
 import NavItem from './ListItem';
@@ -9,7 +9,7 @@ const AdminNavList = ({open}) => {
       <List>
       <NavItem open={open } text={'Add Product'} icon={<Add/>} pathname='addproduct'/>
       <NavItem open={open } text={'Manage Orders'} icon={<ProductionQuantityLimits/>} pathname='manageorders'/>
-      <NavItem open={open } text={'Manage Product'} icon={<ViewInAr/>} pathname='manageproduct'/>
+      <NavItem open={open } text={'Manage Products'} icon={<ViewInAr/>} pathname='manageproducts'/>
       <NavItem open={open } text={'Manage All Users'} icon={<ManageAccounts/>} pathname='manageusers'/>
       </List>
     );
