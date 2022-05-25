@@ -10,8 +10,7 @@ import MenuIcon from "./MenuIcon";
 import NavBar from "./NavBar";
 import UserAvatar from "./UserAvatar";
 import UserMenuBar from "./UserMenuBar";
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "All Users", "Dashboard"];
+const pages = ["Home","Products","Blog","About"];
 const ToolBar = ({ open,openNavMenu,closeNavMenu,nav}) => {
   const [user, loading] = useAuthState(auth);
     const [userNav, setUserNav] = useState(null);
@@ -65,7 +64,6 @@ const ToolBar = ({ open,openNavMenu,closeNavMenu,nav}) => {
           <UserMenuBar
             userNav={userNav}
             closeUserMenu={closeUserMenu}
-            settings={settings}
           />
         </Box>
       ) : (

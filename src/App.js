@@ -13,34 +13,32 @@ import Users from './Pages/Admin/Users';
 import Profile from './Pages/Authentication/Profile';
 import AddProducts from './Pages/Products/AddProducts';
 import DashBoard from './Pages/Admin/DashBoard';
+import Blog from './Pages/Blog/Blog';
+import About from './Pages/About/About';
+import RequireAdmin from './Pages/Authentication/RequireAdmin';
 
 
 function App() {
   return (
-    <div className='min-h-screen flex flex-col'>
+    <div className="min-h-screen flex flex-col">
       <Header></Header>
       <Routes>
         {/* Home  */}
         <Route path="/" element={<Home></Home>} />
+        <Route path="/home" element={<Home></Home>} />
+        <Route path="/blog" element={<Blog></Blog>} />
+        <Route path="/about" element={<About></About>} />
 
         {/* authentication related  */}
-        <Route path="login" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
+        <Route path="login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
         {/* pages  */}
         <Route
           path="products"
           element={
             <RequireAuth>
-              <Products/>
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="All%20Users"
-          element={
-            <RequireAuth>
-              <Users/>
+              <Products />
             </RequireAuth>
           }
         />
@@ -48,7 +46,7 @@ function App() {
           path="Profile"
           element={
             <RequireAuth>
-              <Profile/>
+              <Profile />
             </RequireAuth>
           }
         />
@@ -56,7 +54,7 @@ function App() {
           path="addProducts"
           element={
             <RequireAuth>
-              <AddProducts/>
+              <AddProducts />
             </RequireAuth>
           }
         />
@@ -64,10 +62,19 @@ function App() {
           path="DashBoard"
           element={
             <RequireAuth>
-              <DashBoard/>
+              <DashBoard />
             </RequireAuth>
           }
-        />
+        >
+          <Route
+            path="manageusers"
+            element={<RequireAdmin><Users/></RequireAdmin>}
+          />
+          <Route
+            path="addproduct"
+            element={<RequireAdmin><AddProducts/></RequireAdmin>}
+          />
+        </Route>
       </Routes>
 
       <Footer></Footer>

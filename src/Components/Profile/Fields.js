@@ -1,6 +1,5 @@
-import { Edit } from "@mui/icons-material";
-import { Box, IconButton, InputBase, Paper } from "@mui/material";
-import React, { useRef } from "react";
+
+import {  Paper } from "@mui/material";
 
 const Fields = ({ value, register,label,...props }) => {
   return (

@@ -4,7 +4,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import auth from '../../firebase';
 
-const UserMenuBar = ({userNav,closeUserMenu,settings}) => {
+const UserMenuBar = ({userNav,closeUserMenu}) => {
     return (
       <Menu
         sx={{ mt: "45px" }}
@@ -22,11 +22,9 @@ const UserMenuBar = ({userNav,closeUserMenu,settings}) => {
         open={Boolean(userNav)}
         onClose={closeUserMenu}
       >
-        {settings.map((setting) => (
-          <MenuItem key={setting} onClick={closeUserMenu}>
-            <NavLink to={setting}>{setting}</NavLink>
+          <MenuItem  onClick={closeUserMenu}>
+            <NavLink to={'/profile'}>{'Profile'}</NavLink>
           </MenuItem>
-        ))}
 
         <MenuItem
           onClick={() => {

@@ -1,12 +1,12 @@
 import { Construction, Facebook, Twitter, YouTube } from '@mui/icons-material';
-import { Box, Container, CssBaseline, Grid, Link, Stack, Typography } from '@mui/material';
+import { Box, Container,  Grid, Link, Stack, Typography } from '@mui/material';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Copyright from './CopyRight';
 
 const Footer = () => {
   const {pathname} = useLocation();
-  if (pathname==='/Dashboard') {
+  if (pathname.includes('Dashboard')) {
     return;
   }
     return (

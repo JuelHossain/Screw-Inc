@@ -3,21 +3,24 @@ import { IconButton } from "@mui/material";
 import React from "react";
 import { useLocation } from "react-router-dom";
 
-const MenuIcon = ({ openNavMenu ,open}) => {
+const MenuIcon = ({ openNavMenu, open }) => {
+  
   const { pathname } = useLocation();
-  if (pathname === "DashBoard") {
+  if (pathname.includes('Dashboard')) {
     return (
       <IconButton
+        aria-controls="menu-appbar"
+        aria-haspopup="true"
         color="inherit"
         aria-label="open drawer"
         onClick={openNavMenu}
         edge="start"
         sx={{
-          marginRight: 5,
+          mx: "13px",
           ...(open && { display: "none" }),
         }}
       >
-        <MenuIcon />
+        <Menu />
       </IconButton>
     );
   }
