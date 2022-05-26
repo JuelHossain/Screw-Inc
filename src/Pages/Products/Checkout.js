@@ -94,7 +94,11 @@ const Checkout = () => {
       axios.post("/orders", paymentData).then((res) => {
         if (res.data.acknowledged) {
           const insertedId = res.data.insertedId;
-          axios.get(`/payment/${insertedId}`).then(res => console.log(res));
+          axios.get(`/payment/${insertedId}`).then(res => {
+            if (res.data.GatewayPageURL) {
+              window.location.href = res.data.GatewayPageURL;
+            }
+          });
         }
       });
     }
