@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+
 import { Container } from '@mui/system';
 import React from 'react';
 import Loading from '../../Components/Shared/Loading';
@@ -12,13 +12,12 @@ const Products = () => {
     }
     return (
       <Container maxWidth={"lg"} sx={{my:10}}>
-        <Grid container spacing={2}>
+        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 justify-items-center ' >
           {products.map((product) => (
-            <Grid item xs={6} sm={5} md={4} lg={3} xl={2}>
+           
               <ProductCard product={product} />
-            </Grid>
           ))}
-        </Grid>
+        </div>
       </Container>
     );
 };

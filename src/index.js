@@ -11,6 +11,7 @@ import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from 'styled-components';
 import axios from 'axios';
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ChakraProvider } from "@chakra-ui/react";
  
 // setting default base url of axios 
 axios.defaults.baseURL = "http://localhost:5000/";
@@ -57,11 +58,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <QueryClientProvider client={queryClient}>
-          <App />
-        </QueryClientProvider>
-      </ThemeProvider>
+        <ThemeProvider theme={theme}>
+          <QueryClientProvider client={queryClient}>
+            <App />
+          </QueryClientProvider>
+        </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

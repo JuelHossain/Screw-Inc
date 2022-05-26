@@ -3,6 +3,8 @@ import React from 'react';
 import useProduct from '../../Hooks/useProduct';
 import {useParams} from 'react-router-dom'
 import Loading from '../../Components/Shared/Loading';
+import { Container } from '@mui/material';
+
 
 const EditProduct = () => {
     const { id } = useParams();
@@ -12,9 +14,9 @@ const EditProduct = () => {
         return <Loading/>
     }
     return (
-        <div>
-            {product?.name};
-        </div>
+        <Container maxWidth={'sx'}>
+            
+        </Container>
     );
 };
 

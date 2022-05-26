@@ -16,25 +16,37 @@ export default function ProductCard({ product }) {
     const { _id,name, photoURL, photoUrl, upPhoto, price, qty, text } = product;
     if (adminLoading) {
         return <Loading/>
-    }
+  }
   return (
-    <Card sx={{ maxWidth: 400 }}>
-      <CardMedia
-        component="img"
-        height="140"
-        width="240"
-        image={photoURL || photoUrl || upPhoto}
-        alt="green iguana"
+    <div className=" w-[150px]  sm:w-[180px] border">
+      <img
+        className="h-[150px] w-full object-cover"
+        src={photoURL || photoUrl || upPhoto}
+        alt={name}
       />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {name}
-        </Typography>
-              <Typography variant="body2" color="text.secondary">{ text}</Typography>
-      </CardContent>
-      <CardActions>
-    {admin?<Button component={Link} to={`/products/${_id}`} size="small">Manage</Button>:<Button size="small">Order Now</Button>}
-      </CardActions>
-    </Card>
+      <hr />
+      <p className="text-lg h-8 font-semibold pl-2 truncate hover:bg-blue-100/20 ease-in-out duration-300">
+        {name}
+      </p>
+      <hr />
+      <p className="text-md h-12 text-clip overflow-hidden  pl-2 hover:bg-blue-100/20  ease-in-out duration-300">
+        {text}
+      </p>
+      <hr />
+      <div className=" h-16 p-2 hover:bg-blue-100/20 ease-in-out duration-300">
+        <p className="font-bold">Price {price} taka </p>
+        <p className="font-bold">Available: {qty}pcs </p>
+      </div>
+      <hr />
+      {admin ? (
+        <Button fullWidth component={Link} to={`products/${_id}`}>
+          Manage
+        </Button>
+      ) : (
+        <Button fullWidth component={Link} to={`/checkout/${_id}`}>
+          Order
+        </Button>
+      )}
+    </div>
   );
 }

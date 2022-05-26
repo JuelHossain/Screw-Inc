@@ -17,7 +17,6 @@ const EmailInput = ({register,errors,...props}) => {
         error={Boolean(errors.email)}
         helperText={errors.email?.message}
         margin="normal"
-        required
         fullWidth
         label="Email Address"
         {...props}

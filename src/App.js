@@ -19,6 +19,7 @@ import RequireAdmin from './Pages/Authentication/RequireAdmin';
 import EditProduct from './Pages/Products/EditProduct.js';
 import ManageProducts from './Pages/Admin/ManageProducts';
 import ManageOrders from './Pages/Admin/ManageOrders';
+import Checkout from './Pages/Products/Checkout';
 
 
 function App() {
@@ -43,6 +44,14 @@ function App() {
           element={
             <RequireAdmin>
               <EditProduct />
+            </RequireAdmin>
+          }
+        />
+        <Route
+          path="checkout/:id"
+          element={
+            <RequireAdmin>
+              <Checkout />
             </RequireAdmin>
           }
         />
