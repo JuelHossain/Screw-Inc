@@ -11,10 +11,9 @@ import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from 'styled-components';
 import axios from 'axios';
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ChakraProvider } from "@chakra-ui/react";
  
 // setting default base url of axios 
-axios.defaults.baseURL = "http://localhost:5000/";
+axios.defaults.baseURL = "https://screw-inc.herokuapp.com/";
 
 // setting a default auth header to axios 
 axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem("accessToken")}`;

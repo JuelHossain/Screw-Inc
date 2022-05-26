@@ -20,6 +20,8 @@ import EditProduct from './Pages/Products/EditProduct.js';
 import ManageProducts from './Pages/Admin/ManageProducts';
 import ManageOrders from './Pages/Admin/ManageOrders';
 import Checkout from './Pages/Products/Checkout';
+import Payment from './Pages/Products/Payment';
+import Tools from './Pages/Products/Tools';
 
 
 function App() {
@@ -38,13 +40,21 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         {/* pages  */}
-        <Route path="products" element={<Products />} />
+        <Route path="products" element={<Tools />} />
         <Route
           path="products/:id"
           element={
-            <RequireAdmin>
+            <RequireAuth>
               <EditProduct />
-            </RequireAdmin>
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="payment/:id"
+          element={
+            <RequireAuth>
+              <Payment />
+            </RequireAuth>
           }
         />
         <Route
