@@ -24,13 +24,14 @@ import useOrders from "../../Hooks/useOrders";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useAdmin from "../../Hooks/useAdmin";
-export default function OrdersTable() {
+export default function OrdersTable({orders,ordersLoading,refetchOrders,ordersError}) {
   const navigate = useNavigate();
   const [admin, adminLoading] = useAdmin();
   const [isError, setIsError] = React.useState(false);
   const [deleteError, setDeleteError] = React.useState(false);
+  const [paid, setPaid] = React.useState(false);
   // getting all orders from data base
-  const { orders, ordersLoading, ordersError, refetchOrders } = useOrders();
+  
   //open confirm button when deleting a order.
   const [confirm, setConfirm] = React.useState(false);
   //order id to delete
@@ -44,14 +45,19 @@ export default function OrdersTable() {
       })
       .catch(() => setIsError(true));
   };
-  const handleDelete = (id) => {
-    axios
-      .delete(`/orders/${id}`)
-      .then((res) => {
-        res.data.acknowledged && refetchOrders();
-        return res.data;
-      })
-      .catch((err) => setDeleteError(err));
+  
+  const handleDelete = () => {
+    if (!paid) {
+      axios
+        .delete(`/orders/${orderId}`)
+        .then((res) => {
+          res.data.acknowledged && refetchOrders();
+          return res.data;
+        })
+        .catch((err) => setDeleteError(err));
+    } else {
+      toast.warn('You Cannot Delete Your Order Because It is already paid.  Thanks')
+    }
   };
 
   if (ordersLoading||adminLoading) {
@@ -130,25 +136,44 @@ export default function OrdersTable() {
                     )}
                   </TableCell>
                   <TableCell align="center">
-                    <Chip
-                      onClick={() => {
-                        if (!shipped) {
-                          paid
-                            ? makeOrderShipped(_id)
-                            : toast.error(
-                                "You Can Not Make This order shipped Because Its Not paid yet."
-                              );
-                        }
-                      }}
-                      color={shipped ? "default" : "error"}
-                      label={shipped ? "shipped" : "ship"}
-                    />
+                    {admin ? (
+                      <Chip
+                        onClick={() => {
+                          if (!shipped) {
+                            paid
+                              ? makeOrderShipped(_id)
+                              : toast.error(
+                                  "You Can Not Make This order shipped Because Its Not paid yet."
+                                );
+                          }
+                        }}
+                        color={shipped ? "default" : "error"}
+                        label={shipped ? "shipped" : "ship"}
+                      />
+                    ) : (
+                      <Chip
+                        onClick={() => {
+                          if (!shipped) {
+                            !paid
+                              ? toast.error(
+                                  "Please Pay To Confirm The Order, Then We will ship Your Order as soon as possible"
+                                )
+                              : toast.error(
+                                  "We Will Shipp Your Order As Soon as Possible Please Be Patience"
+                                );
+                          }
+                        }}
+                        color={shipped ? "default" : "error"}
+                        label={shipped ? "shipped" : "Not Shipped"}
+                      />
+                    )}
                   </TableCell>
                   <TableCell align="right">
                     <Chip
                       onClick={() => {
                         setConfirm(true);
                         setOrderId(_id);
+                        setPaid(paid);
                       }}
                       label={"Delete"}
                     />
@@ -170,7 +195,7 @@ export default function OrdersTable() {
         }
         falsy="No"
         truthy="Yes"
-        agreed={() => handleDelete(orderId)}
+        agreed={() => handleDelete()}
       />
     </div>
   );

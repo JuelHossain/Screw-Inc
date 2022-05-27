@@ -111,7 +111,10 @@ const EditProduct = () => {
                 ),
               }}
               {...register("name")}
-              defaultValue={name&&name}
+                          value={name}
+                          onFocus={(e) => {
+                              e.target.value = ''
+                          }}
               fullWidth
               placeholder={"Tools Name"}
               sx={{ mb: 1 }}

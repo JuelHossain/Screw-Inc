@@ -23,25 +23,34 @@ import Tools from './Pages/Products/Tools';
 import Success from './Pages/payment/success';
 import AddProducts from './Pages/Admin/AddProducts';
 import DashBoardDefault from './Pages/Admin/DashBoardDefault';
+import useAdmin from './Hooks/useAdmin';
+import Loading from './Components/Shared/Loading';
+import MyOrders from './Pages/User/MyOrders';
+import MyReviews from './Pages/User/MyReviews';
+import Addareview from './Pages/User/Addareview';
+import Products from './Pages/Products/Products';
+import { Reviews } from '@mui/icons-material';
 
 
 function App() {
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header></Header>
       <Routes>
         {/* Home  */}
         <Route path="/" element={<Home></Home>} />
-        <Route path="/home" element={<Home></Home>} />
+        <Route path="/Home" element={<Home></Home>} />
         <Route path="/blog" element={<Blog></Blog>} />
         <Route path="/about" element={<About></About>} />
+        <Route path="/Reviews" element={<Reviews></Reviews>} />
 
         {/* authentication related  */}
         <Route path="login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
         {/* pages  */}
-        <Route path="products" element={<Tools />} />
+        <Route path="products" element={<Products />} />
         <Route
           path="products/:id"
           element={
@@ -62,7 +71,12 @@ function App() {
           path="payment/success"
           element={
             <RequireAuth>
-              <Success title={"Thank You ! Your Payment Have Been Success." } des={'We Will Contact You Via Email . And Your Order Will be Shipped As Soon As Possible Thank You.'} />
+              <Success
+                title={"Thank You ! Your Payment Have Been Success."}
+                des={
+                  "We Will Contact You Via Email . And Your Order Will be Shipped As Soon As Possible Thank You."
+                }
+              />
             </RequireAuth>
           }
         />
@@ -70,7 +84,12 @@ function App() {
           path="payment/canceled"
           element={
             <RequireAuth>
-              <Success title={"Oops ! You Have Canceled Your Payment." } des={"Don't Worry, You Can Pay Later from the dashboard / my order page . please be noted that your order will not be shipped until we have got your payment thank You."} />
+              <Success
+                title={"Oops ! You Have Canceled Your Payment."}
+                des={
+                  "Don't Worry, You Can Pay Later from the dashboard / my order page . please be noted that your order will not be shipped until we have got your payment thank You."
+                }
+              />
             </RequireAuth>
           }
         />
@@ -78,7 +97,12 @@ function App() {
           path="payment/failed"
           element={
             <RequireAuth>
-              <Success title={"Oops ! Your Payment Failed" } des={"Don't Worry, You Can Pay Later from the dashboard / my order page . please be noted that your order will not be shipped until we have got your payment thank You."} />
+              <Success
+                title={"Oops ! Your Payment Failed"}
+                des={
+                  "Don't Worry, You Can Pay Later from the dashboard / my order page . please be noted that your order will not be shipped until we have got your payment thank You."
+                }
+              />
             </RequireAuth>
           }
         />
@@ -106,11 +130,36 @@ function App() {
             </RequireAuth>
           }
         >
-          <Route index
+          <Route
+            index
             element={
-              <RequireAdmin>
+              <RequireAuth>
                 <DashBoardDefault />
-              </RequireAdmin>
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="myorders"
+            element={
+              <RequireAuth>
+                <MyOrders />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="myreviews"
+            element={
+              <RequireAuth>
+                <MyReviews />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="addareview"
+            element={
+              <RequireAuth>
+                <Addareview />
+              </RequireAuth>
             }
           />
           <Route

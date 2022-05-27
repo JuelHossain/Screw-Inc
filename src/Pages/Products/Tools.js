@@ -14,17 +14,16 @@ import useAdmin from "../../Hooks/useAdmin";
 import { ButtonGroup} from "@mui/material";
 import {  CurrencyFranc,ProductionQuantityLimits } from "@mui/icons-material";
 
-export default function Tools() {
-  const { products, productsLoading } = useProducts();
-  const [admin, adminLoading ] = useAdmin();
-  if (productsLoading || adminLoading) {
-    return <Loading />;
+export default function Tools({products}) {
+  const [admin, adminLoading] = useAdmin();
+  if (adminLoading) {
+    return <Loading/>
   }
   return (
     <main>
       <Container sx={{ py: 8 }} maxWidth="xl">
         <Grid container spacing={2}>
-          {products.map((product) => (
+          {products?.map((product) => (
             <Grid item key={product._id} xs={12} sm={6} md={4} lg={3}>
               <Card
                 sx={{
@@ -34,7 +33,12 @@ export default function Tools() {
                 }}
               >
                 <CardContent sx={{ flexGrow: 0 }}>
-                  <Typography variant="h5" height={36} color="primary">
+                  <Typography
+                    variant="h5"
+                    height={36}
+                    color="primary"
+                    whiteSpace={"nowrap"}
+                  >
                     {product.name}
                   </Typography>
                 </CardContent>
@@ -51,9 +55,7 @@ export default function Tools() {
                   alt="random"
                 />
                 <ButtonGroup sx={{ mt: 1, px: 1 }} disableElevation fullWidth>
-                  <Button
-                    endIcon={<CurrencyFranc />}
-                  >
+                  <Button endIcon={<CurrencyFranc />}>
                     Price-{product.price}
                   </Button>
                   <Button endIcon={<ProductionQuantityLimits />}>
