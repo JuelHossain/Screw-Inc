@@ -18,14 +18,14 @@ import {useAuthState} from 'react-firebase-hooks/auth'
 import Confirm from "./Confirm";
 
 export default function DenseTable() {
-    const [currentUser,loading] = useAuthState(auth);
+  const [currentUser,loading] = useAuthState(auth);
   const [isError, setIsError] = React.useState(false);
   const [deleteError, setDeleteError] = React.useState(false);
   const { data: users, isLoading, error, refetch } = useQuery('users', async () => await axios('/users').then(res => res.data));
   //open confirm button when deleting the user
   const [confirm, setConfirm] = React.useState(false);
   //user email to delete
-  const [email, setEmail] = React.useState(false);
+  const [email, setEmail] = React.useState('');
     const makeAdmin = (email,value) => {
         axios.put(`/users/admin/${email}`, { admin: value }).then(res => {
             res.data.acknowledged && refetch();

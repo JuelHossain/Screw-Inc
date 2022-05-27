@@ -24,9 +24,9 @@ const Confirm = ({ open, setOpen, title, text, agreed, falsy, truthy }) => {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={()=>setOpen(false)}>{falsy ||'Cancal'}</Button>
+            <Button color='error' onClick={()=>setOpen(false)}>{falsy ||'Cancal'}</Button>
                     <Button
-                        color='error'
+                        color= 'success' 
                         onClick={() => {
                         agreed();
                         setOpen(false);

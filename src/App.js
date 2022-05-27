@@ -22,6 +22,7 @@ import ManageOrders from './Pages/Admin/ManageOrders';
 import Checkout from './Pages/Products/Checkout';
 import Payment from './Pages/Products/Payment';
 import Tools from './Pages/Products/Tools';
+import Success from './Pages/payment/success';
 
 
 function App() {
@@ -54,6 +55,30 @@ function App() {
           element={
             <RequireAuth>
               <Payment />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="payment/success"
+          element={
+            <RequireAuth>
+              <Success title={"Thank You ! Your Payment Have Been Success." } des={'We Will Contact You Via Email . And Your Order Will be Shipped As Soon As Possible Thank You.'} />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="payment/canceled"
+          element={
+            <RequireAuth>
+              <Success title={"Oops ! You Have Canceled Your Payment." } des={"Don't Worry, You Can Pay Later from the dashboard / my order page . please be noted that your order will not be shipped until we have got your payment thank You."} />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="payment/failed"
+          element={
+            <RequireAuth>
+              <Success title={"Oops ! Your Payment Failed" } des={"Don't Worry, You Can Pay Later from the dashboard / my order page . please be noted that your order will not be shipped until we have got your payment thank You."} />
             </RequireAuth>
           }
         />
