@@ -59,9 +59,7 @@ export default function OrdersTable() {
   } else if (ordersError || isError || deleteError) {
     if (
       ordersError?.response?.status === 403 ||
-      ordersError?.response?.status === 401 ||
-      isError ||
-      deleteError
+      ordersError?.response?.status === 401
     ) {
       setTimeout(() => signOut(auth), 4000);
       localStorage.removeItem("accessToken");

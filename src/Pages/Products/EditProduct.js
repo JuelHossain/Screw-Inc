@@ -111,7 +111,7 @@ const EditProduct = () => {
                 ),
               }}
               {...register("name")}
-              defaultValue={name}
+              defaultValue={name&&name}
               fullWidth
               placeholder={"Tools Name"}
               sx={{ mb: 1 }}
@@ -123,7 +123,7 @@ const EditProduct = () => {
                 ),
               }}
               {...register("price")}
-              defaultValue={price}
+              value={price}
               fullWidth
               placeholder="price"
               sx={{ mb: 1 }}
