@@ -10,7 +10,7 @@ import MenuIcon from "./MenuIcon";
 import NavBar from "./NavBar";
 import UserAvatar from "./UserAvatar";
 import UserMenuBar from "./UserMenuBar";
-const pages = ["Home","Products","Blog","About"];
+const pages = ["Home","Products","Reviews","Blog","About"];
 const ToolBar = ({ open,openNavMenu,closeNavMenu,nav}) => {
   const [user, loading] = useAuthState(auth);
     const [userNav, setUserNav] = useState(null);
@@ -55,21 +55,22 @@ const ToolBar = ({ open,openNavMenu,closeNavMenu,nav}) => {
       {/* user profile  */}
       {user ? (
         <Box sx={{ flexGrow: 0 }}>
-          <Button variant="">
-            <NavLink to={"/Dashboard"}> DashBoard</NavLink>
+          <Button variant="" component={NavLink} to={"/Dashboard"}>
+            DashBoard
           </Button>
           {/* user button and phot  */}
           <UserAvatar user={user} openUserMenu={openUserMenu} />
           {/* user menu bar   */}
-          <UserMenuBar
-            userNav={userNav}
-            closeUserMenu={closeUserMenu}
-          />
+          <UserMenuBar userNav={userNav} closeUserMenu={closeUserMenu} />
         </Box>
       ) : (
         <Box sx={{ flexGrow: 0, display: "flex" }}>
-          <Button sx={{ my: 2, color: "white", display: "block" }}>
-            <NavLink to={"/login"}> Login</NavLink>
+          <Button
+            component={NavLink}
+            to={"/login"}
+            sx={{ my: 2, color: "white", display: "block" }}
+          >
+             Login
           </Button>
         </Box>
       )}

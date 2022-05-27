@@ -11,12 +11,12 @@ import useProducts from "../../Hooks/useProducts";
 import Loading from "../../Components/Shared/Loading";
 import { Link } from "react-router-dom";
 import useAdmin from "../../Hooks/useAdmin";
-import { ButtonGroup, Chip, Stack } from "@mui/material";
-import { CurrencyBitcoin, CurrencyExchange, CurrencyExchangeTwoTone, CurrencyFranc, CurrencyLira, EventAvailable, ProductionQuantityLimits } from "@mui/icons-material";
+import { ButtonGroup} from "@mui/material";
+import {  CurrencyFranc,ProductionQuantityLimits } from "@mui/icons-material";
 
 export default function Tools() {
   const { products, productsLoading } = useProducts();
-  const { admin, adminLoading } = useAdmin();
+  const [admin, adminLoading ] = useAdmin();
   if (productsLoading || adminLoading) {
     return <Loading />;
   }
@@ -64,8 +64,9 @@ export default function Tools() {
                   {admin ? (
                     <Button
                       fullWidth
+                      variant={"contained"}
                       component={Link}
-                      to={`manageproduct/${product._id}`}
+                      to={`/products/${product._id}`}
                     >
                       Manage
                     </Button>

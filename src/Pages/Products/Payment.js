@@ -117,7 +117,7 @@ const Payment = () => {
         </Paper>
         <Paper sx={{ p: 1, mb: 2 }}>
           <Typography fontSize={17} mb="1px">
-            You are ordering , {productName}
+            You are Paying for , {productName}
           </Typography>
           <Typography fontSize={17} fontWeight={"200"} mb="1px">
             Quantity : {qty} pcs.

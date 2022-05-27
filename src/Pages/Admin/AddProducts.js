@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import addIllu from '../../addproduct.webp'
+import addIllu from "../../screw driver robot.png";
 const AddProducts = () => {
     const [fetching, setfetching] = useState(false);
     const [upPhoto, setUpPhoto] = useState("");
@@ -50,7 +50,7 @@ const AddProducts = () => {
   
     return (
       <Container maxWidth={"xl"}>
-        <Box component={Paper} sx={{ display: {md:'flex'} ,gap:1,p:2,mt:8}}>
+        <Box sx={{ display: {md:'flex'} ,gap:1,mt:8}}>
           <Paper
             sx={{
               display:{xs:'none',sm:'block'},
@@ -58,7 +58,7 @@ const AddProducts = () => {
               textAlign: "center",
               p: 1,
             }}
-          ><img className='w-full h-full object-cover' src={addIllu} alt="" />
+          ><img className='w-full h-full object-cover rounded-md' src={addIllu} alt="" />
 
           </Paper>
           <Paper

@@ -11,7 +11,8 @@ import useAdmin from "../../Hooks/useAdmin";
 import { Link } from "react-router-dom";
 
 export default function ProductCard({ product }) {
-    const [admin, adminLoading] = useAdmin();
+  const [admin, adminLoading] = useAdmin();
+  console.log(admin);
     const { _id,name, photoURL, photoUrl, upPhoto, price, qty, text } = product;
     if (adminLoading) {
         return <Loading/>

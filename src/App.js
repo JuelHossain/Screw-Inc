@@ -5,13 +5,11 @@ import Home from './Pages/Home/Home'
 import Footer from './Components/Footer/Footer'
 import Login from './Pages/Authentication/Login';
 import Register from './Pages/Authentication/Regster';
-import Products from './Pages/Products/Products';
 import RequireAuth from './Pages/Authentication/RequireAuth';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import Users from './Pages/Admin/Users';
 import Profile from './Pages/Authentication/Profile';
-import AddProducts from './Pages/Products/AddProducts';
 import DashBoard from './Pages/Admin/DashBoard';
 import Blog from './Pages/Blog/Blog';
 import About from './Pages/About/About';
@@ -23,6 +21,8 @@ import Checkout from './Pages/Products/Checkout';
 import Payment from './Pages/Products/Payment';
 import Tools from './Pages/Products/Tools';
 import Success from './Pages/payment/success';
+import AddProducts from './Pages/Admin/AddProducts';
+import DashBoardDefault from './Pages/Admin/DashBoardDefault';
 
 
 function App() {
@@ -99,14 +99,6 @@ function App() {
           }
         />
         <Route
-          path="addProducts"
-          element={
-            <RequireAuth>
-              <AddProducts />
-            </RequireAuth>
-          }
-        />
-        <Route
           path="DashBoard"
           element={
             <RequireAuth>
@@ -114,6 +106,13 @@ function App() {
             </RequireAuth>
           }
         >
+          <Route index
+            element={
+              <RequireAdmin>
+                <DashBoardDefault />
+              </RequireAdmin>
+            }
+          />
           <Route
             path="manageusers"
             element={

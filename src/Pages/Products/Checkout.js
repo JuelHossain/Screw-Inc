@@ -67,9 +67,6 @@ const Checkout = () => {
         <Typography fontSize={20} sx={{ m: 2 }} align="center">
           You are Ordering {name}
         </Typography>
-        <Typography height={80} overflow='auto' fontSize={16} sx={{ m: 2 }} align="center">
-        {text}
-        </Typography>
         <Stack onSubmit={handleSubmit(onSubmit)} component={"form"} spacing={1}>
           <TextField
             variant="filled"
