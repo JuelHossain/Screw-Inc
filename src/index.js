@@ -13,7 +13,7 @@ import axios from 'axios';
 import { QueryClient, QueryClientProvider } from "react-query";
  
 // setting default base url of axios 
-axios.defaults.baseURL = "http://localhost:5000/";
+axios.defaults.baseURL = "https://screw-inc.herokuapp.com/";
 
 // setting a default auth header to axios 
 axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem("accessToken")}`;

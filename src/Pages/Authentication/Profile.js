@@ -1,19 +1,12 @@
-import { Edit, Watch } from "@mui/icons-material";
+
 import {
-  Avatar,
-  Box,
-  Button,
+
   Chip,
   Container,
   Divider,
-  IconButton,
-  Input,
-  InputLabel,
+
   Paper,
   Stack,
-  styled,
-  TextField,
-  Typography,
 } from "@mui/material";
 import { useSendEmailVerification } from "react-firebase-hooks/auth";
 import React, { useEffect, useState } from "react";
@@ -25,6 +18,7 @@ import Title from "../../Components/Profile/Title";
 import Loading from "../../Components/Shared/Loading";
 import auth from "../../firebase";
 import { LoadingButton } from "@mui/lab";
+import useAdmin from "../../Hooks/useAdmin";
 const Profile = () => {
   const [selected, setSelected] = useState(false);
   const [fetching, setfetching] = useState(false);
@@ -76,13 +70,15 @@ const Profile = () => {
       await setSubmitted(false);
     }, 3000);
   };
+  const [admin, adminLoading] = useAdmin();
   if (loading) {
     return <Loading />;
   } else if (updateError) {
     console.log(updateError);
   }
   return (
-    <Container component={"main"} maxWidth={"sm"} sx={{ my: 10 }}>
+    <Container component={"main"} maxWidth={"sm"} sx={{ my: 10, position: 'relative' }}>
+      <Chip label={admin ? 'Admin' : 'User'} color='primary' sx={{ top:0 ,right:0}}/>
       <Paper
         sx={{ m: "10", p: "10px", display: "flex", flexDirection: "column" }}
       >

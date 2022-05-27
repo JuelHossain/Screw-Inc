@@ -1,4 +1,5 @@
 
+import { ResetTv } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
 import {  Box, Container, Divider, Paper, TextField, Typography } from '@mui/material';
 import axios from 'axios';
@@ -11,9 +12,7 @@ const AddProducts = () => {
     const [fetching, setfetching] = useState(false);
     const [upPhoto, setUpPhoto] = useState("");
     const key = "07f19fbb34b923c7d9b27b1f5fd52764";
-    const { register, handleSubmit,formState:{errors} } = useForm();
-    
-
+  const {reset, register, handleSubmit, formState: { errors } } = useForm();
     const onsubmit = async (data) => {
         setfetching(true);
         console.log(data);
@@ -42,7 +41,8 @@ const AddProducts = () => {
         }
         const product = {...data,upPhoto}
         await axios.post('/products', product).then(res => {
-            if (res.data.acknowledged) {
+          if (res.data.acknowledged) {
+            reset();
                 setfetching(false);
                 toast.success('Product Added Successfully')
         }});
