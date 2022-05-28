@@ -15,7 +15,7 @@ const About = () => {
               alt="juel hossain"
             />
           </div>
-          <div>
+          <div className="items-start justify-center flex flex-col" >
             <p className="text-4xl">Hi,</p>
             <p className="text-4xl">My Name Is Juel Hossain</p>
           </div>
@@ -25,7 +25,7 @@ const About = () => {
         <div className="border h-10"></div>
         <div className="flex flex-col items-center justify-center gap-4">
           <h6 className="text-2xl p-2 font-bold">My Skills</h6>
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap items-center justify-center">
             <Skill>html</Skill>
             <Skill>css</Skill>
             <Skill>Javascript</Skill>
@@ -39,56 +39,86 @@ const About = () => {
         </div>
         <div className="flex flex-col items-center justify-center gap-4">
           <h6 className="text-2xl p-2 font-bold">Projects</h6>
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap items-center justify-center">
             <Skill>
-              <a target='_blank' rel='noreferrer' href="https://tourboy.web.app/">Tour Boy</a>
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://tourboy.web.app/"
+              >
+                Tour Boy
+              </a>
             </Skill>
             <Skill>
-              <a target='_blank' rel='noreferrer' href="https://efruitsmanager.web.app/">Efruits-Management</a>
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://efruitsmanager.web.app/"
+              >
+                Efruits-Management
+              </a>
             </Skill>
             <Skill>
-              <a target='_blank' rel='noreferrer' href="https://ridethefuture.netlify.app/">Ride The Future</a>
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://ridethefuture.netlify.app/"
+              >
+                Ride The Future
+              </a>
             </Skill>
             <Skill>
-              <a target='_blank' rel='noreferrer' href="https://superheroshop.netlify.app/">SuperHero Shop</a>
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://superheroshop.netlify.app/"
+              >
+                SuperHero Shop
+              </a>
             </Skill>
           </div>
-          <div>
-            
-          </div>
+          <div></div>
         </div>
         <div className="flex flex-col items-center justify-center gap-4">
           <h6 className="text-2xl p-2 font-bold">Educationl Background</h6>
-          <div className="flex flex-wrap">
-            <Skill>
-              ssc in business in 2016
-            </Skill>
-            <Skill>
-              dropped from College in 2018
-            </Skill>
-           
+          <div className="flex flex-wrap items-center justify-center">
+            <Skill>ssc in business in 2016</Skill>
+            <Skill>dropped from College in 2018</Skill>
           </div>
-          <div>
-            
-          </div>
+          <div></div>
         </div>
         <div className="flex flex-col items-center justify-center gap-4">
           <h6 className="text-2xl p-2 font-bold">Contact Me.</h6>
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap items-center justify-center">
             <Skill>
-             <a  target='_blank' rel='noreferrer' href="mailto:jrrahman01@gmail.com">Email Me</a>
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="mailto:jrrahman01@gmail.com"
+              >
+                Email Me
+              </a>
             </Skill>
             <Skill>
-             <a target='_blank' rel='noreferrer' href="mailto:jrrahman01@gmail.com">At</a>
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="mailto:jrrahman01@gmail.com"
+              >
+                At
+              </a>
             </Skill>
             <Skill>
-             <a target='_blank' rel='noreferrer' href="mailto:jrrahman01@gmail.com">Jrrahman01@gmail.com</a>
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="mailto:jrrahman01@gmail.com"
+              >
+                Jrrahman01@gmail.com
+              </a>
             </Skill>
-           
           </div>
-          <div>
-            
-          </div>
+          <div></div>
         </div>
       </Container>
     );
