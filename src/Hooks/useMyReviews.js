@@ -5,12 +5,16 @@ import auth from "../firebase";
 
 const useMyReviews = () => {
     const [user, userLoading] = useAuthState(auth);
-    const { data, isLoading, error, refetch } = useQuery("MyReviews", () =>
-      axios(`/myreviews?email=${user?.email}`),{enabled:!userLoading}
-    );
+    const {
+      data,
+      isLoading: myReviewsLoading,
+      error: myReviewsError,
+      refetch:refetchMyReviews,
+    } = useQuery("MyReviews", () => axios(`/myreviews?email=${user?.email}`), {
+      enabled: !userLoading,
+    });
     const myReviews = data?.data;
-    console.log('my reviews',myReviews);
-    return{myReviews,isLoading,error,refetch}
+    return { myReviews, myReviewsLoading, myReviewsError, refetchMyReviews };
 };
 
 export default useMyReviews;

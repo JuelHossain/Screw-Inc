@@ -19,10 +19,8 @@ import useReview from "../../Hooks/useReview";
 import { useParams } from "react-router-dom";
 const EditReview = () => {
     const { id } = useParams();
-    const { review, reviewLoading, reviewError, refetchReview } = useReview(id);
-
-    const { userName, userPhoto, _id, reviewText, reviewStar } = review ?? {};
-        console.log(reviewText, "this is review");
+    const { review, reviewLoading, refetchReview } = useReview(id);
+    const {  reviewText, reviewStar } = review ?? {};
   const labels = {
     0.5: "Useless",
     1: "Useless+",
@@ -37,9 +35,7 @@ const EditReview = () => {
   };
   const [admin, adminLoading] = useAdmin();
   const [user, userLoading] = useAuthState(auth);
-  console.log(reviewStar);
     const [value, setValue] = useState(reviewStar&&reviewStar);
-    console.log(value,'this is value');
   const [text, setText] = useState(reviewText&&reviewText);
   console.log(text);
   const [hover, setHover] = React.useState(-1);
@@ -67,13 +63,14 @@ const EditReview = () => {
       } else {
         axios.put(`/reviews/${id}`, newReview).then((res) => {
           if (res.data.acknowledged) {
+            refetchReview();
             toast.success("ooh,You Have Edited Your Review Thank You.");
           }
         });
       }
     }
   };
-  if (userLoading) {
+  if (userLoading || adminLoading || reviewLoading) {
     return <Loading />;
   }
   return (

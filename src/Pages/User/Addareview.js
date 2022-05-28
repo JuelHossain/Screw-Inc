@@ -32,7 +32,8 @@ const Addareview = () => {
       return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
   }
 
-  const addareview = () => {
+  const addareview = (e) => {
+    e.preventDefault();
     if (user) {
       const userName = user.displayName;
       const userEmail = user.email;
@@ -56,6 +57,8 @@ const Addareview = () => {
            if (res.data.acknowledged) {
              refetchReviews();
              toast.success("ooh, You Have added a review Thank You.");
+             e.target.reset();
+
            }
          });
       }
@@ -71,7 +74,9 @@ const Addareview = () => {
       <Container maxWidth="lg">
         <Typography variant="h6">Please Add A Review About Us.</Typography>
         <Divider />
-        <Box sx={{ position: "relative" }}>
+        <Box
+          onSubmit={addareview}
+          component={'form'} sx={{ position: "relative" }}>
           <TextField
             onBlur={(e) => {
               setText(e.target.value);
@@ -83,9 +88,9 @@ const Addareview = () => {
             fullWidth
           />
           <Button
+            type='submit'
             sx={{ position: "absolute", bottom: -50, right: 4 }}
             variant="outlined" 
-            onClick={addareview}
           >
             {" "}
             Add

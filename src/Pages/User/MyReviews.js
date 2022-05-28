@@ -6,7 +6,6 @@ import { useQuery } from "react-query";
 import ReviewTable from "../../Components/DashBoard/Table/ReviewTable";
 import Loading from "../../Components/Shared/Loading";
 import auth from "../../firebase";
-import useMyReviews from "../../Hooks/useMyReviews";
 
 const MyReviews = () => {
  const [user, userLoading] = useAuthState(auth);
