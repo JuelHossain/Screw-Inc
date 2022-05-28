@@ -29,7 +29,8 @@ import MyOrders from './Pages/User/MyOrders';
 import MyReviews from './Pages/User/MyReviews';
 import Addareview from './Pages/User/Addareview';
 import Products from './Pages/Products/Products';
-import { Reviews } from '@mui/icons-material';
+import Reviews from './Pages/Reviews/Reviews';
+import EditReview from './Pages/Reviews/EditReview';
 
 
 function App() {
@@ -43,7 +44,7 @@ function App() {
         <Route path="/Home" element={<Home></Home>} />
         <Route path="/blog" element={<Blog></Blog>} />
         <Route path="/about" element={<About></About>} />
-        <Route path="/Reviews" element={<Reviews></Reviews>} />
+        <Route path="/reviews" element={<Reviews></Reviews>} />
 
         {/* authentication related  */}
         <Route path="login" element={<Login />} />
@@ -119,6 +120,14 @@ function App() {
           element={
             <RequireAuth>
               <Profile />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="editReview/:id"
+          element={
+            <RequireAuth>
+              <EditReview />
             </RequireAuth>
           }
         />

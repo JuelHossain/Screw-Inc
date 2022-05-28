@@ -5,8 +5,10 @@ const usePageCount = (size) => {
      const { data: c,isLoading:counting,refetch:recount } = useQuery("productCounts", () =>
        axios(`/productCounts`)
      );
-     const productCount = c?.data?.count;
-    const count = Math.ceil(productCount / size);
-    return {count,counting,recount}
+  const productCount = c?.data?.count;
+  console.log(size);
+  const count = Math.ceil(productCount / size);
+  return { count, counting, recount }
+  
 }
 export default usePageCount;

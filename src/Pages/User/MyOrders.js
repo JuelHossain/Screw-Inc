@@ -11,7 +11,6 @@ const MyOrders = () => {
     const [user, userLoading] = useAuthState(auth);
     const { data, isLoading, error, refetch } = useQuery('myorders', () => axios(`/myOrders?email=${user?.email}`));
     const myOrders = data?.data;
-    console.log('my ordres ',myOrders);
     if (userLoading) {
         return <Loading/>
     }

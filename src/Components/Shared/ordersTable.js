@@ -98,6 +98,7 @@ export default function OrdersTable({orders,ordersLoading,refetchOrders,ordersEr
               <TableCell>User Name</TableCell>
               <TableCell align="right">Product Name</TableCell>
               <TableCell align="right">Quantity</TableCell>
+              <TableCell align="right">Total Price</TableCell>
               <TableCell align="right">Payment Status</TableCell>
               <TableCell align="right">Shipping Status</TableCell>
               <TableCell align="right">Delete</TableCell>
@@ -106,7 +107,7 @@ export default function OrdersTable({orders,ordersLoading,refetchOrders,ordersEr
 
           <TableBody>
             {orders?.map((order) => {
-              const { paid, productName, qty, userName, _id, shipped } = order;
+              const { paid, productName,totalPrice, qty, userName, _id, shipped } = order;
               return (
                 <TableRow
                   key={_id}
@@ -119,6 +120,7 @@ export default function OrdersTable({orders,ordersLoading,refetchOrders,ordersEr
                   </TableCell>
                   <TableCell align="right">{productName}</TableCell>
                   <TableCell align="right">{qty}</TableCell>
+                  <TableCell align="right">{totalPrice}</TableCell>
                   <TableCell align="center">
                     {admin ? (
                       <Chip

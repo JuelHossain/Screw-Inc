@@ -5,7 +5,7 @@ import bannerimage from '../../screw image.webp'
 
 const Banner = () => {
     return (
-      <Container maxWidth={"xl"}>
+      <Container maxWidth={"lg"}>
         <Box sx={{ display: "flex",}}>
           <Stack
             sx={{
@@ -20,7 +20,7 @@ const Banner = () => {
           </Stack>
           <Box sx={{flex:1}}>
             <img
-              className="w-full h-full object-cover "
+              className="w-full h-full object-cover m-2"
               src={bannerimage}
               alt="hero-banner"
             />
