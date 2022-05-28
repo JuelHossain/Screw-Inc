@@ -96,7 +96,6 @@ export default function ProductsTable() {
             {products?.map((product) => {
               const { photoURL, photoUrl, upPhoto, name, price, qty, _id } =
                 product;
-              console.log(_id);
               return (
                 <TableRow
                   key={_id}

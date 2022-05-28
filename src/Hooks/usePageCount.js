@@ -6,7 +6,6 @@ const usePageCount = (size) => {
        axios(`/productCounts`)
      );
   const productCount = c?.data?.count;
-  console.log(size);
   const count = Math.ceil(productCount / size);
   return { count, counting, recount }
   

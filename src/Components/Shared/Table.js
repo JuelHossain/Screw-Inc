@@ -82,7 +82,7 @@ export default function DenseTable() {
           <TableBody>
             {users?.map(
               (user) =>
-                currentUser.email === user.email || (
+                !(currentUser.email === user.email) && (
                   <TableRow
                     key={user._id}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -122,8 +122,7 @@ export default function DenseTable() {
                       />
                     </TableCell>
                   </TableRow>
-                )
-            )}
+                ))}
           </TableBody>
         </Table>
       </TableContainer>

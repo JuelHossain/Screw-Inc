@@ -9,7 +9,6 @@ const useOrders = () => {
     refetch: refetchOrders,
   } = useQuery("orders", () => axios(`/orders`));
     const orders = data?.data;
-    console.log(orders);
   return { orders, ordersLoading,ordersError, refetchOrders };
 };
 export default useOrders;

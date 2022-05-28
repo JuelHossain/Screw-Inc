@@ -14,10 +14,8 @@ const useAdmin = () => {
     if (email) {
       setAdminLoading(true);
       axios.get(`/admin/${email}`).then(res => {
-        console.log(res);
         if (res.status===200) {
-          console.log(res.data)
-          setAdmin(res.data.isAdmin);
+          setAdmin(res?.data?.isAdmin);
           setAdminLoading(false);
         } else {
           setAdminLoading(false);

@@ -7,6 +7,7 @@ import MyReviews from '../User/MyReviews';
 import AddProducts from './AddProducts';
 import ManageOrders from './ManageOrders';
 import ManageProducts from './ManageProducts';
+import ManageReviews from './ManageReviews';
 import Users from './Users';
 
 const DashBoardDefault = () => {
@@ -20,6 +21,7 @@ const DashBoardDefault = () => {
           <ManageProducts />
           <ManageOrders />
           <Users />
+          <ManageReviews/>
         </div>
       );
     } else {

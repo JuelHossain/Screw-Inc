@@ -31,7 +31,7 @@ const Addareview = () => {
     function getLabelText(value) {
       return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
   }
-  console.log(getLabelText(2));
+
   const addareview = () => {
     if (user) {
       const userName = user.displayName;

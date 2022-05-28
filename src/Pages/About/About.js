@@ -41,16 +41,16 @@ const About = () => {
           <h6 className="text-2xl p-2 font-bold">Projects</h6>
           <div className="flex flex-wrap">
             <Skill>
-              <a href="https://tourboy.web.app/">Tour Boy</a>
+              <a target='_blank' rel='noreferrer' href="https://tourboy.web.app/">Tour Boy</a>
             </Skill>
             <Skill>
-              <a href="https://efruitsmanager.web.app/">Efruits-Management</a>
+              <a target='_blank' rel='noreferrer' href="https://efruitsmanager.web.app/">Efruits-Management</a>
             </Skill>
             <Skill>
-              <a href="https://ridethefuture.netlify.app/">Ride The Future</a>
+              <a target='_blank' rel='noreferrer' href="https://ridethefuture.netlify.app/">Ride The Future</a>
             </Skill>
             <Skill>
-              <a href="https://superheroshop.netlify.app/">SuperHero Shop</a>
+              <a target='_blank' rel='noreferrer' href="https://superheroshop.netlify.app/">SuperHero Shop</a>
             </Skill>
           </div>
           <div>
@@ -76,13 +76,13 @@ const About = () => {
           <h6 className="text-2xl p-2 font-bold">Contact Me.</h6>
           <div className="flex flex-wrap">
             <Skill>
-             <a href="mailto:jrrahman01@gmail.com">Email Me</a>
+             <a  target='_blank' rel='noreferrer' href="mailto:jrrahman01@gmail.com">Email Me</a>
             </Skill>
             <Skill>
-             <a href="mailto:jrrahman01@gmail.com">At</a>
+             <a target='_blank' rel='noreferrer' href="mailto:jrrahman01@gmail.com">At</a>
             </Skill>
             <Skill>
-             <a href="mailto:jrrahman01@gmail.com">Jrrahman01@gmail.com</a>
+             <a target='_blank' rel='noreferrer' href="mailto:jrrahman01@gmail.com">Jrrahman01@gmail.com</a>
             </Skill>
            
           </div>

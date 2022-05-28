@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useProduct from "../../Hooks/useProduct";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import Loading from "../../Components/Shared/Loading";
 import {
   Box,
@@ -18,12 +18,12 @@ import { toast } from "react-toastify";
 
 const EditProduct = () => {
 
-    const { id } = useParams();
+  const { id } = useParams();
+  const navigate = useNavigate();
     // products
     const { product, productLoading, refetchProduct } = useProduct(id);
     // destructured product
     const { photoURL, photoUrl, upPhoto, name, price, qty, text } = product ?? {};
-    console.log(text)
     // uploaded photo here 
     const [editedPhoto, setEditedPhoto] = useState("");
     // for button loading management 
@@ -36,10 +36,8 @@ const EditProduct = () => {
       handleSubmit,
     reset,
   } = useForm();
-    
     // product is loading
   const onsubmit = async (data) => {
-    console.log(data);
     const image = data.photo[0] || null;
       if (image) {
           setFetching(true);
@@ -62,12 +60,13 @@ const EditProduct = () => {
         });
     }setFetching(true);
     const newProduct = { ...data, upPhoto: editedPhoto };
-      await axios.put(`/products/${id}`, newProduct).then((res) => {
+      await axios.put(`/products/${id}`, newProduct).then(async(res) => {
           if (res.data.acknowledged) {
-              console.log(res.data);
-              refetchProduct();
-              toast.success("Product Added Successfully");
-              setFetching(false);
+              toast.success("Product Edited Successfully");
+            setFetching(false);
+             navigate("/products");
+           await  refetchProduct();
+         
           }
       }).catch(error => setFetching(false));
   };
@@ -111,10 +110,7 @@ const EditProduct = () => {
                 ),
               }}
               {...register("name")}
-                          value={name}
-                          onFocus={(e) => {
-                              e.target.value = ''
-                          }}
+                          defaultValue={name}
               fullWidth
               placeholder={"Tools Name"}
               sx={{ mb: 1 }}
@@ -126,7 +122,7 @@ const EditProduct = () => {
                 ),
               }}
               {...register("price")}
-              value={price}
+              defaultValue={price}
               fullWidth
               placeholder="price"
               sx={{ mb: 1 }}
@@ -164,7 +160,6 @@ const EditProduct = () => {
             <Divider>Or</Divider>
             <TextField
               {...register("photoURL")}
-              defaultValue={photoURL}
               fullWidth
               placeholder="Add A Photo Link"
               sx={{ mb: 1 }}

@@ -34,7 +34,6 @@ const labels = {
         <Grid container spacing={2}>
           {reviews?.map((r) => {
             const { userName, userPhoto, _id, reviewText, reviewStar } = r;
-            console.log(r);
 
             return (
               <Grid item key={_id} xs={12} sm={6} md={4} lg={3}>

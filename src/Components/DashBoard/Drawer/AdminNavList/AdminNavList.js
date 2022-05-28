@@ -1,4 +1,4 @@
-import { Add, FormatListBulleted, ManageAccounts,  ProductionQuantityLimits, Reviews, StarHalf, ViewInAr } from '@mui/icons-material';
+import { Add, FormatListBulleted, ManageAccounts,  ProductionQuantityLimits, RateReviewRounded, Reviews, StarHalf, ViewInAr } from '@mui/icons-material';
 import { List} from '@mui/material';
 import React from 'react';
 import NavItem from './ListItem';
@@ -7,10 +7,36 @@ import NavItem from './ListItem';
 const AdminNavList = ({open}) => {
     return (
       <List>
-      <NavItem open={open } text={'Add Product'} icon={<Add/>} pathname='addproduct'/>
-      <NavItem open={open } text={'Manage Orders'} icon={<ProductionQuantityLimits/>} pathname='manageorders'/>
-      <NavItem open={open } text={'Manage Products'} icon={<ViewInAr/>} pathname='manageproducts'/>
-      <NavItem open={open } text={'Manage All Users'} icon={<ManageAccounts/>} pathname='manageusers'/>
+        <NavItem
+          open={open}
+          text={"Add Product"}
+          icon={<Add />}
+          pathname="addproduct"
+        />
+        <NavItem
+          open={open}
+          text={"Manage Orders"}
+          icon={<ProductionQuantityLimits />}
+          pathname="manageorders"
+        />
+        <NavItem
+          open={open}
+          text={"Manage Products"}
+          icon={<ViewInAr />}
+          pathname="manageproducts"
+        />
+        <NavItem
+          open={open}
+          text={"Manage All Users"}
+          icon={<ManageAccounts />}
+          pathname="manageusers"
+        />
+        <NavItem
+          open={open}
+          text={"Manage Reviews"}
+          icon={<RateReviewRounded />}
+          pathname="managereviews"
+        />
       </List>
     );
 };

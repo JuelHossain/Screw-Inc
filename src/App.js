@@ -31,6 +31,7 @@ import Addareview from './Pages/User/Addareview';
 import Products from './Pages/Products/Products';
 import Reviews from './Pages/Reviews/Reviews';
 import EditReview from './Pages/Reviews/EditReview';
+import ManageReviews from './Pages/Admin/ManageReviews';
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
         {/* Home  */}
         <Route path="/" element={<Home></Home>} />
         <Route path="/Home" element={<Home></Home>} />
+        <Route path="products" element={<Products />} />
         <Route path="/blog" element={<Blog></Blog>} />
         <Route path="/about" element={<About></About>} />
         <Route path="/reviews" element={<Reviews></Reviews>} />
@@ -51,7 +53,7 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         {/* pages  */}
-        <Route path="products" element={<Products />} />
+
         <Route
           path="products/:id"
           element={
@@ -110,9 +112,9 @@ function App() {
         <Route
           path="checkout/:id"
           element={
-            <RequireAdmin>
+            <RequireAuth>
               <Checkout />
-            </RequireAdmin>
+            </RequireAuth>
           }
         />
         <Route
@@ -200,6 +202,14 @@ function App() {
             element={
               <RequireAdmin>
                 <ManageOrders />
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="managereviews"
+            element={
+              <RequireAdmin>
+                <ManageReviews />
               </RequireAdmin>
             }
           />

@@ -85,7 +85,7 @@ export default function ReviewTable({
               <TableCell align="left">User Name</TableCell>
               <TableCell align="center">Rating</TableCell>
               <TableCell align="center">Review</TableCell>
-              {admin || <TableCell align="center">Edit</TableCell>}
+              {!admin && <TableCell align="center">Edit</TableCell>}
               <TableCell align="center">Delete</TableCell>
             </TableRow>
           </TableHead>
@@ -126,7 +126,7 @@ export default function ReviewTable({
                   <TableCell align="center">
                     {reviewLabel ? reviewLabel : ""}
                   </TableCell>
-                  <TableCell align="center">
+                  {!admin&&<TableCell align="center">
                     <Chip
                       icon={<Edit />}
                       label={"Edit"}
@@ -134,7 +134,7 @@ export default function ReviewTable({
                         navigate(`/editReview/${_id}`);
                       }}
                     />
-                  </TableCell>
+                  </TableCell>}
 
                   <TableCell align="center">
                     <Chip
