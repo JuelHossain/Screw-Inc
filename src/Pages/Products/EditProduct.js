@@ -160,6 +160,7 @@ const EditProduct = () => {
             <Divider>Or</Divider>
             <TextField
               {...register("photoURL")}
+              defaultValue={photoURL}
               fullWidth
               placeholder="Add A Photo Link"
               sx={{ mb: 1 }}
