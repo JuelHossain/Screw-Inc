@@ -19,6 +19,7 @@ import Loading from "../../Components/Shared/Loading";
 import auth from "../../firebase";
 import { LoadingButton } from "@mui/lab";
 import useAdmin from "../../Hooks/useAdmin";
+import useUser from "../../Hooks/userUser";
 const Profile = () => {
   const [selected, setSelected] = useState(false);
   const [fetching, setfetching] = useState(false);
@@ -36,6 +37,8 @@ const Profile = () => {
       setSelected(true);
     }
   }, [selected, photolength]);
+  const { user1, userLoading } = useUser();
+  console.log(user1);
   const onSubmit = async (data) => {
     const image = data.photoURL[0];
     if (image) {
