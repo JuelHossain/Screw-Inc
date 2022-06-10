@@ -11,7 +11,7 @@ import axios from "axios";
 import Loading from "./Loading";
 import Toast from "./Alert";
 import { Chip } from "@mui/material";
-import { AdminPanelSettingsRounded, Delete, VerifiedUser } from "@mui/icons-material";
+import { AdminPanelSettingsRounded, VerifiedUser } from "@mui/icons-material";
 import { signOut } from "firebase/auth";
 import auth from "../../firebase";
 import {useAuthState} from 'react-firebase-hooks/auth'

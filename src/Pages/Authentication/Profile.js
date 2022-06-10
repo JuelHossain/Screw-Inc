@@ -71,7 +71,7 @@ const Profile = () => {
     }, 3000);
   };
   const [admin, adminLoading] = useAdmin();
-  if (loading) {
+  if (loading||adminLoading) {
     return <Loading />;
   } else if (updateError) {
     console.log(updateError);

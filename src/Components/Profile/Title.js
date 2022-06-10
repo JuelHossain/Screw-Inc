@@ -1,5 +1,5 @@
-import { Edit } from '@mui/icons-material';
-import { Box, IconButton, InputBase, Paper, TextField } from '@mui/material';
+
+import {  Paper } from '@mui/material';
 import React from 'react';
 
 const Title = ({value,register}) => {

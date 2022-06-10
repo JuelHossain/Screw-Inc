@@ -16,7 +16,7 @@ import {
   Paper,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Google, ResetTv, } from "@mui/icons-material";
+import { Google } from "@mui/icons-material";
 import {
   useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,

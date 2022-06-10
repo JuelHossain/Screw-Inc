@@ -1,5 +1,4 @@
 
-import { ResetTv } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
 import {  Box, Container, Divider, Paper, TextField, Typography } from '@mui/material';
 import axios from 'axios';
@@ -7,7 +6,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import addIllu from "../../screw driver robot.png";
+import addIllu from "../../assets/screw driver robot.png";
 const AddProducts = () => {
     const [fetching, setfetching] = useState(false);
     const [upPhoto, setUpPhoto] = useState("");

@@ -1,7 +1,6 @@
 import { Container, CssBaseline, Typography } from "@mui/material";
 import React from "react";
 import OrdersTable from "../../Components/Shared/ordersTable";
-import DenseTable from "../../Components/Shared/Table";
 import useOrders from "../../Hooks/useOrders";
 
 const ManageOrders = () => {

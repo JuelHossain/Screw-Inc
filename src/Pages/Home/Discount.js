@@ -1,7 +1,7 @@
 import { Button, Container } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
-import Technician from "../../technician.jpg";
+import Technician from "../../assets/technician.jpg";
 const Discount = () => {
   return (
     <Container maxWidth={"lg"} sx={{ my: 3 }}>

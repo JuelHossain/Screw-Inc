@@ -1,11 +1,8 @@
 import { Container, CssBaseline, Typography } from "@mui/material";
-import axios from "axios";
+
 import React from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useQuery } from "react-query";
 import ReviewTable from "../../Components/DashBoard/Table/ReviewTable";
 import Loading from "../../Components/Shared/Loading";
-import auth from "../../firebase";
 import useReviews from "../../Hooks/useReviews";
 
 const ManageReviews = () => {

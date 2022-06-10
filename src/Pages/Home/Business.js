@@ -15,11 +15,11 @@ const BusinessCard = ({icon,title,text}) => {
 }
 const Business = () => {
     return (
-      <Container maxWidth={"lg"} sx={{ my: 10, textAlign: "center" }}>
+      <Container maxWidth={"lg"} sx={{ my: 10, textAlign: "center" }} mx="auto">
         <Typography variant="h4">What We Do?</Typography>
         <Divider sx={{ mx: 30, my: 2 }} />
 
-        <Grid container spacing={2}>
+        <Grid container spacing={2} marginX={"auto"} justifyContent="center">
           <Grid item xs={12} sm={6} md={4} lg={3}>
             <BusinessCard
               icon={<Sell sx={{ fontSize: 50 }} color="primary" />}

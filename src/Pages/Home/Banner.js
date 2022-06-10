@@ -1,7 +1,7 @@
 
 import { Box, Container, Stack, Typography } from '@mui/material';
 import React from 'react';
-import bannerimage from '../../screw image.webp'
+import bannerimage from '../../assets/screw image.webp'
 
 const Banner = () => {
     return (

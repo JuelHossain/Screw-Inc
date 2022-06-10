@@ -9,25 +9,16 @@ import Paper from "@mui/material/Paper";
 import axios from "axios";
 import Loading from "./Loading";
 import Toast from "./Alert";
-import { Chip, InputAdornment, OutlinedInput, TextField } from "@mui/material";
-import {
-  AdminPanelSettingsRounded,
-  Paid,
-  Payment,
-  VerifiedUser,
-} from "@mui/icons-material";
+import { Chip, InputAdornment, OutlinedInput } from "@mui/material";
 import { signOut } from "firebase/auth";
 import auth from "../../firebase";
 import Confirm from "./Confirm";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import useAdmin from "../../Hooks/useAdmin";
 import useProducts from "../../Hooks/useProducts";
-import { set, useForm } from "react-hook-form";
 export default function ProductsTable() {
   const navigate = useNavigate();
   const [admin, adminLoading] = useAdmin();
-  const [isError, setIsError] = React.useState(false);
   const [deleteError, setDeleteError] = React.useState(false);
   // getting all products from data base
   const { products, productsLoading, productsError, refetchProducts } =
@@ -48,11 +39,10 @@ export default function ProductsTable() {
 
   if (productsLoading || adminLoading) {
     return <Loading />;
-  } else if (productsError || isError || deleteError) {
+  } else if (productsError || deleteError) {
     if (
       productsError?.response?.status === 403 ||
       productsError?.response?.status === 401 ||
-      isError ||
       deleteError
     ) {
       setTimeout(() => signOut(auth), 4000);

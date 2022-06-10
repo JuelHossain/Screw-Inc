@@ -14,7 +14,6 @@ import axios from "axios";
 import { signOut } from "firebase/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import auth from "../../../firebase";
 import useAdmin from "../../../Hooks/useAdmin";
 import Toast from "../../Shared/Alert";

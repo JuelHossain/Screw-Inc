@@ -6,21 +6,17 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { useQuery } from "react-query";
 import axios from "axios";
 import Loading from "./Loading";
 import Toast from "./Alert";
 import { Chip } from "@mui/material";
 import {
-  AdminPanelSettingsRounded,
   Paid,
   Payment,
-  VerifiedUser,
 } from "@mui/icons-material";
 import { signOut } from "firebase/auth";
 import auth from "../../firebase";
 import Confirm from "./Confirm";
-import useOrders from "../../Hooks/useOrders";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useAdmin from "../../Hooks/useAdmin";

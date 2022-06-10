@@ -1,5 +1,5 @@
-import { Comment, Factory, PriceChange, QuestionAnswer, Sell } from "@mui/icons-material";
-import { Box, Container, Divider, IconButton, List, ListItem, Stack, Typography } from "@mui/material";
+import { Comment, QuestionAnswer } from "@mui/icons-material";
+import { Box, Container, Divider, List, ListItem, Stack, Typography } from "@mui/material";
 import React from "react";
 
 const BusinessCard = ({ icon,title, text,children }) => {

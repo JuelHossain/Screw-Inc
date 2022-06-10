@@ -19,12 +19,10 @@ import ManageProducts from './Pages/Admin/ManageProducts';
 import ManageOrders from './Pages/Admin/ManageOrders';
 import Checkout from './Pages/Products/Checkout';
 import Payment from './Pages/Products/Payment';
-import Tools from './Pages/Products/Tools';
+
 import Success from './Pages/payment/success';
 import AddProducts from './Pages/Admin/AddProducts';
 import DashBoardDefault from './Pages/Admin/DashBoardDefault';
-import useAdmin from './Hooks/useAdmin';
-import Loading from './Components/Shared/Loading';
 import MyOrders from './Pages/User/MyOrders';
 import MyReviews from './Pages/User/MyReviews';
 import Addareview from './Pages/User/Addareview';
@@ -32,6 +30,7 @@ import Products from './Pages/Products/Products';
 import Reviews from './Pages/Reviews/Reviews';
 import EditReview from './Pages/Reviews/EditReview';
 import ManageReviews from './Pages/Admin/ManageReviews';
+import NotFound from './Pages/NotFound';
 
 
 function App() {
@@ -47,6 +46,7 @@ function App() {
         <Route path="/blog" element={<Blog></Blog>} />
         <Route path="/about" element={<About></About>} />
         <Route path="/reviews" element={<Reviews></Reviews>} />
+        <Route path="*" element={<NotFound></NotFound>} />
 
         {/* authentication related  */}
         <Route path="login" element={<Login />} />

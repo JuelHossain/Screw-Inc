@@ -61,6 +61,14 @@ export default function Tools({products}) {
                     qty-{product.qty}
                   </Button>
                 </ButtonGroup>
+                <ButtonGroup sx={{ mt: 1, px: 1 }} disableElevation fullWidth>
+                  <Button endIcon={<ProductionQuantityLimits />}>
+                    Min-Order-Qty: {100}
+                  </Button>
+                </ButtonGroup>
+                <p className="border-blue-500 rounded border h-20 m-2 p-1 text-left text-sky-600 overflow-clip text-ellipsis ">
+                    {product.text}
+                </p>
                 <CardActions>
                   {admin ? (
                     <Button

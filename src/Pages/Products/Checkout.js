@@ -1,21 +1,19 @@
+
 import { LoadingButton } from "@mui/lab";
 import {
-  Box,
   Container,
-  Input,
+
   InputAdornment,
   Paper,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
-import { toHaveStyle } from "@testing-library/jest-dom/dist/matchers";
 import axios from "axios";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
 import Loading from "../../Components/Shared/Loading";
 import auth from "../../firebase";
 import useProduct from "../../Hooks/useProduct";
@@ -24,9 +22,9 @@ const Checkout = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [user, userLoading] = useAuthState(auth);
-  const { product, productLoading, refetchProduct } = useProduct(id);
+  const { product, productLoading } = useProduct(id);
   const {
-    getValues,
+    watch,
     register,
     handleSubmit,
     formState: { errors },
@@ -42,7 +40,6 @@ const Checkout = () => {
   const name = product?.name;
   const qty = parseInt(product?.qty);
   const price = parseInt(product?.price);
-  const text = product?.text;
   const onSubmit = (data) => {
     const order = {
       userName: user?.displayName,
@@ -64,6 +61,9 @@ const Checkout = () => {
   return (
     <Container maxWidth="xs" sx={{ my: 8 }}>
       <Paper sx={{ p: 1 }}>
+        <Typography fontSize={20} sx={{ m: 2 }} align="center">
+         Hi {user.displayName}
+        </Typography>
         <Typography fontSize={20} sx={{ m: 2 }} align="center">
           You are Ordering {name}
         </Typography>
@@ -133,7 +133,7 @@ const Checkout = () => {
             min={0}
             readOnly
             variant="filled"
-            value={price * getValues("qty")}
+            value={price * watch('qty')}
             id="outlined-start-adornment"
             {...register("totalPrice", {
               valueAsNumber: true,
@@ -142,6 +142,19 @@ const Checkout = () => {
               startAdornment: (
                 <InputAdornment position="start">
                   Total Price Will Be:
+                </InputAdornment>
+              ),
+            }}
+          />
+          <TextField
+            readOnly
+            variant="filled"
+            value={user.email}
+            id="outlined-start-adornment"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                 Email Address: 
                 </InputAdornment>
               ),
             }}
