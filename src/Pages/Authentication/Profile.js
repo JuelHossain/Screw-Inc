@@ -66,9 +66,9 @@ const Profile = () => {
     } else if (isDirty) {
       await axios
         .put(`users/${user1.email}`, {
-          phoneNumber: data.PhoneNumber,
+          phoneNumber: data?.PhoneNumber,
           displayName: data?.name ? data?.name : user1.displayName,
-          address: data.Address,
+          address: data?.Address,
         })
         .then((res) => {
           if (res.data.result.acknowledged) {
@@ -137,7 +137,7 @@ const Profile = () => {
               readOnly
               disabled
             />
-            {emailVerified && (
+            {!emailVerified && (
               <LoadingButton
                 sx={{ position: "absolute", right: 25, bottom: 16 }}
                 loading={sending}
