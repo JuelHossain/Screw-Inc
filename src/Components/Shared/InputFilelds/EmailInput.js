@@ -14,8 +14,8 @@ const EmailInput = ({register,errors,...props}) => {
             message: "Email Must Be Valid",
           },
         })}
-        error={Boolean(errors.email)}
-        helperText={errors.email?.message}
+        error={Boolean(errors?.email)}
+        helperText={errors?.email?.message}
         margin="normal"
         fullWidth
         label="Email Address"

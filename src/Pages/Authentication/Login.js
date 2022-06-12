@@ -73,7 +73,9 @@ export default function Login() {
       signOut(auth);
       localStorage.removeItem('accessToken');
       setTimeout(() => {
-        setOpen(false);
+         setOpen(false);
+         navigate('/');
+         window.location.reload();
       },3000)
     }
   }, [user,gUser,error,navigate,from,tError,isPosted]);

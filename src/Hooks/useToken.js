@@ -9,10 +9,9 @@ const useToken = (user) => {
     useEffect(() => {
         if (user) {
             axios.put(`users/${user.user.email}`, user.user).then((res) => {
-                console.log(res);
                 setToken(res.data.token);
                 setIsPosted(res.data.result.acknowledged);
-                console.log(user.user.displayName,'posted')
+               
             }).catch(error => setTerror(error));
         }
     }, [user]);

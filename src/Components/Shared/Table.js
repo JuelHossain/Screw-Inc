@@ -21,7 +21,10 @@ export default function DenseTable() {
   const [currentUser,loading] = useAuthState(auth);
   const [isError, setIsError] = React.useState(false);
   const [deleteError, setDeleteError] = React.useState(false);
-  const { data: users, isLoading, error, refetch } = useQuery('users', async () => await axios('/users').then(res => res.data));
+  const { data, isLoading, error, refetch } = useQuery('users', async () => await axios('/users'));
+  const users = data?.data;
+
+
   //open confirm button when deleting the user
   const [confirm, setConfirm] = React.useState(false);
   //user email to delete
