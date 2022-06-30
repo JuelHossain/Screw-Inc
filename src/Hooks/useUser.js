@@ -11,7 +11,7 @@ const useUser = () => {
     error: userError,
     refetch: refetchUser,
   } = useQuery(
-    "user",
+    `user-${user.email}`,
     async () => await axios(`/users/${user.email}`),{enabled:!loading})
   const user1 = userr?.data
   return { user1, userLoading, userError, refetchUser };

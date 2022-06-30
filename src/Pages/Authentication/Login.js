@@ -1,9 +1,6 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Google } from "@mui/icons-material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Copyright from "../../Components/Footer/CopyRight";
-import { useForm } from "react-hook-form";
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
-import auth from "../../firebase";
+import { LoadingButton } from "@mui/lab";
 import {
   Box,
   Button,
@@ -13,19 +10,22 @@ import {
   FormControlLabel,
   Grid,
   Paper,
-  Stack,
+  Stack
 } from "@mui/material";
-import { useEffect, useState } from "react";
-import ShowError from "../../Components/Shared/ShowError";
-import Fly from "../../Components/Shared/Modal";
-import EmailInput from "../../Components/Shared/InputFilelds/EmailInput";
-import PasswordInput from "../../Components/Shared/InputFilelds/PasswordInput";
-import { Google } from "@mui/icons-material";
-import FormTitle from "../../Components/Shared/InputFilelds/FormTitle";
-import { LoadingButton } from "@mui/lab";
-import Toast from "../../Components/Shared/Alert";
-import useToken from "../../Hooks/useToken";
 import { signOut } from "firebase/auth";
+import { useEffect, useState } from "react";
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { useForm } from "react-hook-form";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import Copyright from "../../Components/Footer/CopyRight";
+import Toast from "../../Components/Shared/Alert";
+import EmailInput from "../../Components/Shared/InputFilelds/EmailInput";
+import FormTitle from "../../Components/Shared/InputFilelds/FormTitle";
+import PasswordInput from "../../Components/Shared/InputFilelds/PasswordInput";
+import Fly from "../../Components/Shared/Modal";
+import ShowError from "../../Components/Shared/ShowError";
+import auth from "../../firebase";
+import useToken from "../../Hooks/useToken";
 
 //login Page Component
 export default function Login() {
@@ -73,10 +73,11 @@ export default function Login() {
       signOut(auth);
       localStorage.removeItem('accessToken');
       setTimeout(() => {
-         setOpen(false);
-         navigate('/');
-         window.location.reload();
-      },3000)
+        setOpen(false);
+        navigate('/');
+      }, 3000);
+       window.location.reload();
+
     }
   }, [user,gUser,error,navigate,from,tError,isPosted]);
 

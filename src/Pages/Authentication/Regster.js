@@ -1,34 +1,30 @@
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { Link, useNavigate } from "react-router-dom";
-import Copyright from "../../Components/Footer/CopyRight";
-import { useForm } from "react-hook-form";
-import FormTitle from "../../Components/Shared/InputFilelds/FormTitle";
-import NameInput from "../../Components/Shared/InputFilelds/NameInput";
-import EmailInput from "../../Components/Shared/InputFilelds/EmailInput";
-import PasswordInput from "../../Components/Shared/InputFilelds/PasswordInput";
-import {
-  Container,
-  Box,
-  Button,
-  CssBaseline,
-  Grid,
-  Stack,
-  Paper,
-} from "@mui/material";
-import { useEffect, useState } from "react";
 import { Google } from "@mui/icons-material";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { LoadingButton } from "@mui/lab";
+import {
+  Box,
+  Button, Container, CssBaseline,
+  Grid, Paper, Stack
+} from "@mui/material";
+import { signOut } from "firebase/auth";
+import { useEffect, useState } from "react";
 import {
   useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
-  useUpdateProfile,
+  useUpdateProfile
 } from "react-firebase-hooks/auth";
-import auth from "../../firebase";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import Copyright from "../../Components/Footer/CopyRight";
 import ConfirmPasswordInput from "../../Components/Shared/InputFilelds/ConfirmPassword";
-import { LoadingButton } from "@mui/lab";
+import EmailInput from "../../Components/Shared/InputFilelds/EmailInput";
 import FormControl from "../../Components/Shared/InputFilelds/FormControl";
+import FormTitle from "../../Components/Shared/InputFilelds/FormTitle";
+import NameInput from "../../Components/Shared/InputFilelds/NameInput";
+import PasswordInput from "../../Components/Shared/InputFilelds/PasswordInput";
 import ShowError from "../../Components/Shared/ShowError";
+import auth from "../../firebase";
 import useToken from "../../Hooks/useToken";
-import { signOut } from "firebase/auth";
 import Terms from "./Terms";
 
 export default function Register() {
@@ -83,6 +79,7 @@ export default function Register() {
        setTimeout(() => {
          setOpen(false);
        }, 3000);
+       window.location.reload();
     }
   },[error,gError,user,gUser,upError,navigate,tError,isPosted])
   return (

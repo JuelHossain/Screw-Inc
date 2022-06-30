@@ -1,7 +1,4 @@
-import React, { useState } from "react";
-import useProduct from "../../Hooks/useProduct";
-import {  useNavigate, useParams } from "react-router-dom";
-import Loading from "../../Components/Shared/Loading";
+import { LoadingButton } from "@mui/lab";
 import {
   Box,
   Container,
@@ -9,23 +6,25 @@ import {
   InputAdornment,
   Paper,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
-import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import Loading from "../../Components/Shared/Loading";
+import useProduct from "../../Hooks/useProduct";
 
 const EditProduct = () => {
 
   const { id } = useParams();
-  const navigate = useNavigate();
+
     // products
-    const { product, productLoading, refetchProduct } = useProduct(id);
+  const { product, productLoading, refetchProduct } = useProduct(id);
+  
     // destructured product
-    const { photoURL, photoUrl, upPhoto, name, price, qty, text } = product ?? {};
-    // uploaded photo here 
-    const [editedPhoto, setEditedPhoto] = useState("");
+    const { photoURL, name, price, qty, text } = product ?? {};
     // for button loading management 
     const [fetching, setFetching] = useState(false);
     // image bb key 
@@ -33,14 +32,16 @@ const EditProduct = () => {
     // useform hook very bad hooks 
   const {
     register,
-      handleSubmit,
+    handleSubmit,
     reset,
+    setValue,
+    formState:{isDirty}
   } = useForm();
     // product is loading
   const onsubmit = async (data) => {
     const image = data.photo[0] || null;
-      if (image) {
-          setFetching(true);
+    if (image) {
+      setFetching(true);
       const formData = new FormData();
       formData.append("image", image);
       const url = `https://api.imgbb.com/1/upload?key=${key}`;
@@ -49,31 +50,42 @@ const EditProduct = () => {
         body: formData,
       })
         .then((res) => res.json())
-        .then((data) => {
+        .then(async(data) => {
           if (data.success) {
-            console.log(data.data.url);
-            setEditedPhoto(data.data.url);
+           await axios.put(`/products/${id}`, { ...data, photoURL: data.data.url }).then(async res => {
+              if (res.data.acknowledged) {
+                toast.success("Data Has Been Updated");
+                await refetchProduct();
+                await setFetching(false);
+                await setValue('photoURL', product.photoURL);
+              }
+            }).catch(err => setFetching(false));
           }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }setFetching(true);
-    const newProduct = { ...data, upPhoto: editedPhoto };
-      await axios.put(`/products/${id}`, newProduct).then(async(res) => {
-          if (res.data.acknowledged) {
-              toast.success("Product Edited Successfully");
-            setFetching(false);
-             navigate("/products");
-           await  refetchProduct();
-         
-          }
+        }).catch(err => setFetching(false));
+    } else {
+      setFetching(true);
+      const photo = () => {
+        if (data.photoURL) {
+          console.log(data.photoURL)
+          return data.photoURL
+        } else {
+          return product.photoURL
+        }
+      }
+      await axios.put(`/products/${id}`, {...data,photoURL:photo()}).then(async (res) => {
+        if (res.data.acknowledged) {
+          toast.success("Product Edited Successfully");
+         await  setFetching(false);
+         await refetchProduct();
+        }
       }).catch(error => setFetching(false));
+    }
   };
+  useEffect(() => {
+    reset()
+  },[product,reset,])
     if (productLoading) {
-        reset();
         return <Loading />;
-        
     }
   return (
     <Container maxWidth={"xl"}>
@@ -88,7 +100,7 @@ const EditProduct = () => {
         >
           <img
             className="w-full h-full object-cover rounded-md"
-            src={upPhoto || photoURL || photoUrl}
+            src={photoURL}
             alt=""
           />
         </Paper>
@@ -160,12 +172,12 @@ const EditProduct = () => {
             <Divider>Or</Divider>
             <TextField
               {...register("photoURL")}
-              defaultValue={photoURL}
               fullWidth
               placeholder="Add A Photo Link"
               sx={{ mb: 1 }}
             />
             <LoadingButton
+              disabled={!isDirty}
               loading={fetching}
               type="submit"
               fullWidth

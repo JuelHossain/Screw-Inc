@@ -8,7 +8,7 @@ const useReview = (id) => {
     error: reviewError,
     refetch:
     refetchReview,
-  } = useQuery(`review`, () => axios(`/reviews/${id}`));
+  } = useQuery(`review${id}`, () => axios(`/reviews/${id}`));
     const review = data?.data;
   return { review, reviewLoading, reviewError, refetchReview };
 };

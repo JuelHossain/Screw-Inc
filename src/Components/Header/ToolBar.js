@@ -1,5 +1,5 @@
 import { Box, Button, Toolbar } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { NavLink, useLocation } from "react-router-dom";
 import auth from "../../firebase";
@@ -12,15 +12,18 @@ import UserAvatar from "./UserAvatar";
 import UserMenuBar from "./UserMenuBar";
 const pages = ["Home","Products","Reviews","Blog","About"];
 const ToolBar = ({ open,openNavMenu,closeNavMenu,nav}) => {
-  const [user, loading] = useAuthState(auth);
+  const [user, loading, error] = useAuthState(auth);
     const [userNav, setUserNav] = useState(null);
     const [isDashboard, setIsDashboard] = useState(false);
     const { pathname } = useLocation();
     useEffect(() => {
         if (pathname === '/Dashboard') {
             setIsDashboard(true);
-        }
-    },[pathname])
+      }
+      if (error) {
+    window.location.reload();
+  }
+    },[pathname,error])
   const openUserMenu = (e) => {
     setUserNav(e.currentTarget);
   };
@@ -30,6 +33,7 @@ const ToolBar = ({ open,openNavMenu,closeNavMenu,nav}) => {
   if (loading) {
     return <Loading />;
   }
+
   return (
     <Toolbar disableGutters>
       {/* logo for bigger screen  */}

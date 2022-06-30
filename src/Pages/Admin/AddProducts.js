@@ -1,8 +1,8 @@
 
 import { LoadingButton } from '@mui/lab';
-import {  Box, Container, Divider, Paper, TextField, Typography } from '@mui/material';
+import { Box, Container, Divider, Paper, TextField, Typography } from '@mui/material';
 import axios from 'axios';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
@@ -13,8 +13,6 @@ const AddProducts = () => {
     const key = "07f19fbb34b923c7d9b27b1f5fd52764";
   const {reset, register, handleSubmit, formState: { errors } } = useForm();
     const onsubmit = async (data) => {
-        setfetching(true);
-        console.log(data);
          const image = data.photo[0] || null
     if (image) {
       setfetching(true);
@@ -28,23 +26,30 @@ const AddProducts = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.success) {
-            console.log(data.data.url);
             setUpPhoto(data.data.url);
             setfetching(false);
           }
         })
         .catch((error) => {
           setfetching(false);
-          console.log(error);
         });
+      }
+      setfetching(true)
+      const photo = () => {
+        if (data.photoURL) {
+          return data.photoURL
+        } else {
+          return upPhoto
         }
-        const product = {...data,upPhoto}
-        await axios.post('/products', product).then(res => {
-          if (res.data.acknowledged) {
-            reset();
-                setfetching(false);
-                toast.success('Product Added Successfully')
-        }});
+      }
+        const product = {...data,photoURL:photo()}
+      await axios.post('/products', product).then(res => {
+        if (res.data.acknowledged) {
+          reset();
+          setfetching(false);
+          toast.success('Product Added Successfully')
+        }
+      }).catch(err => setfetching(false));
   }
   
     return (
