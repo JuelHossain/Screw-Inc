@@ -1,18 +1,18 @@
+import { LoadingButton } from "@mui/lab";
 import { Chip, Container, Divider, Paper, Stack } from "@mui/material";
-import { useSendEmailVerification } from "react-firebase-hooks/auth";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSendEmailVerification } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import Fields from "../../Components/Profile/Fields";
 import Photo from "../../Components/Profile/Photo";
 import Title from "../../Components/Profile/Title";
 import Loading from "../../Components/Shared/Loading";
 import auth from "../../firebase";
-import { LoadingButton } from "@mui/lab";
 import useUser from "../../Hooks/useUser";
-import axios from "axios";
 
 const Profile = () => {
-  const { user1, userLoading, refetchUser } = useUser();
+  const { user, userLoading, refetchUser } = useUser();
   const [selected, setSelected] = useState(false);
   const [fetching, setfetching] = useState(false);
   const [sent, setSent] = useState(false);
@@ -23,7 +23,7 @@ const Profile = () => {
     register,
     handleSubmit,
     watch,
-    formState: {errors, isDirty },
+    formState: { errors, isDirty },
   } = useForm();
 
   const photolength = watch("photoURL")?.length > 0;
@@ -49,7 +49,7 @@ const Profile = () => {
         .then((data) => {
           if (data.success) {
             axios
-              .put(`users/${user1.email}`, { photoURL: data.data.url })
+              .put(`users/${user.email}`, { photoURL: data.data.url })
               .then((res) => {
                 if (res.data.result.acknowledged) {
                   setSubmitted(true);
@@ -65,9 +65,9 @@ const Profile = () => {
         });
     } else if (isDirty) {
       await axios
-        .put(`users/${user1.email}`, {
+        .put(`users/${user.email}`, {
           phoneNumber: data?.PhoneNumber,
-          displayName: data?.name ? data?.name : user1.displayName,
+          displayName: data?.name ? data?.name : user.displayName,
           address: data?.Address,
         })
         .then((res) => {
@@ -94,7 +94,7 @@ const Profile = () => {
       emailVerified,
       admin,
       photoURL,
-    } = user1 ?? {};
+    } = user ?? {};
     return (
       <Container
         component={"main"}
@@ -109,7 +109,7 @@ const Profile = () => {
         <Paper
           sx={{ m: "10", p: "10px", display: "flex", flexDirection: "column" }}
         >
-          <Stack direction="row" position={'relative'}>
+          <Stack direction="row" position={"relative"}>
             <Photo
               photo={photoURL}
               size="150px"
@@ -117,7 +117,11 @@ const Profile = () => {
               selected={selected}
             />
             <Title value={displayName} register={register} />
-            {errors.name&&<p className="absolute bottom-10 right-10 text-red-500">{errors?.name?.message}</p>}
+            {errors.name && (
+              <p className="absolute bottom-10 right-10 text-red-500">
+                {errors?.name?.message}
+              </p>
+            )}
           </Stack>
           <Divider />
           <Fields value={email} register={register} label={"Email"} readOnly />
@@ -142,9 +146,9 @@ const Profile = () => {
                 sx={{ position: "absolute", right: 25, bottom: 16 }}
                 loading={sending}
                 label="Clickable"
-                onClick={ () => {
-                   sendEmailVerification();
-                 setSent(true);
+                onClick={() => {
+                  sendEmailVerification();
+                  setSent(true);
                   setTimeout(() => setSent(false), 3000);
                 }}
               >

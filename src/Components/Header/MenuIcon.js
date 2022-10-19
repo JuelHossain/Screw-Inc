@@ -1,12 +1,12 @@
 import { Menu } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useHeader } from "../../context/HeaderContext";
 
-const MenuIcon = ({ openNavMenu, open }) => {
-  
-  const { pathname } = useLocation();
-  if (pathname.includes('Dashboard')) {
+const MenuIcon = ({ open }) => {
+  const { isDashboard, openNavMenu } = useHeader();
+
+  if (isDashboard) {
     return (
       <IconButton
         aria-controls="menu-appbar"

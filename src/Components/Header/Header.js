@@ -1,27 +1,11 @@
-
-
-import { AppBar, Container,} from "@mui/material";
-import { useState } from "react";
+import { AppBar, Container } from "@mui/material";
 import ToolBar from "./ToolBar";
 
-
-
 const Header = () => {
-  const [nav, setNav] = useState(null);
-   const openNavMenu = (e) => {
-     setNav(e.currentTarget);
-  };
-    const closeNavMenu = () => {
-      setNav(null);
-    };
   return (
-    <AppBar component={"header"} position="static">
+    <AppBar component={"header"} position="sticky">
       <Container maxWidth="xl">
-        <ToolBar
-          nav={nav}
-          openNavMenu={openNavMenu}
-          closeNavMenu={closeNavMenu}
-        />
+        <ToolBar />
       </Container>
     </AppBar>
   );

@@ -1,22 +1,24 @@
-import { Box, Button } from '@mui/material';
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Box, Button } from "@mui/material";
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { useHeader } from "../../context/HeaderContext";
 
-const NavBar = ({pages}) => {
-    return (
-      <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-        {pages.map((page) => (
-          <Button
-            component={NavLink}
-            to={`/${page}`}
-            key={page}
-            sx={{ my: 2, color: "white", display: "block" }}
-          >
+const NavBar = () => {
+  const { pages } = useHeader();
+  return (
+    <Box className={`hidden md:flex justify-center items-center`}>
+      {pages.map((page) => (
+        <Button
+          component={NavLink}
+          to={`/${page}`}
+          key={page}
+          sx={{ my: 2, color: "white", display: "block" }}
+        >
           {page}
-          </Button>
-        ))}
-      </Box>
-    );
+        </Button>
+      ))}
+    </Box>
+  );
 };
 
 export default NavBar;
