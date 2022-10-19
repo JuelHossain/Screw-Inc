@@ -3,7 +3,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "./Components/Footer/Footer";
 import Header from "./Components/Header/Header";
-import About from "./Pages/About/About";
 import DashBoard from "./Pages/Admin/DashBoard";
 import ManageOrders from "./Pages/Admin/ManageOrders";
 import ManageProducts from "./Pages/Admin/ManageProducts";
@@ -13,7 +12,6 @@ import Profile from "./Pages/Authentication/Profile";
 import Register from "./Pages/Authentication/Regster";
 import RequireAdmin from "./Pages/Authentication/RequireAdmin";
 import RequireAuth from "./Pages/Authentication/RequireAuth";
-import Blog from "./Pages/Blog/Blog";
 import Home from "./Pages/Home/Home";
 import Checkout from "./Pages/Products/Checkout";
 import EditProduct from "./Pages/Products/EditProduct.js";
@@ -36,16 +34,13 @@ function App() {
   return (
     <HeaderProvider>
       <div className="min-h-screen flex flex-col">
-        <Header/>
+        <Header />
         <Routes>
-          {/* Home  */}
-          <Route path="/" element={<Home></Home>} />
-          <Route path="/Home" element={<Home></Home>} />
+          <Route path="/" element={<Home />} />
+          <Route path="/Home" element={<Home />} />
           <Route path="products" element={<Products />} />
-          <Route path="/blog" element={<Blog></Blog>} />
-          <Route path="/about" element={<About></About>} />
-          <Route path="/reviews" element={<Reviews></Reviews>} />
-          <Route path="*" element={<NotFound></NotFound>} />
+          <Route path="/reviews" element={<Reviews />} />
+          <Route path="*" element={<NotFound />} />
 
           {/* authentication related  */}
           <Route path="login" element={<Login />} />

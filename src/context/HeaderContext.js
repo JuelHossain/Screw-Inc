@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 export const HeaderContext = createContext();
 export const HeaderProvider = ({ children }) => {
-  const pages = ["Home", "Products", "Reviews", "Blog", "About"];
+  const pages = ["Home", "Products", "Reviews"];
   const userPages = ["Dashboard", "Profile"];
 
   const [nav, setNav] = useState(null);

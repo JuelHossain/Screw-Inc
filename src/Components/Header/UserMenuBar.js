@@ -1,12 +1,14 @@
+import { Logout, SupervisedUserCircleRounded } from "@mui/icons-material";
 import { Menu, MenuItem } from "@mui/material";
 import { signOut } from "firebase/auth";
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useHeader } from "../../context/HeaderContext";
 import auth from "../../firebase";
 
 const UserMenuBar = () => {
   const { userNav, closeUserMenu } = useHeader();
+  const navigate = useNavigate();
   return (
     <Menu
       sx={{ mt: "45px" }}
@@ -24,8 +26,29 @@ const UserMenuBar = () => {
       open={Boolean(userNav)}
       onClose={closeUserMenu}
     >
-      <MenuItem onClick={closeUserMenu}>
-        <NavLink to={"/profile"}>{"Profile"}</NavLink>
+      <MenuItem
+        onClick={() => {
+          navigate("/Profile");
+          closeUserMenu();
+        }}
+        sx={{
+          gap: 2,
+        }}
+      >
+        <SupervisedUserCircleRounded fontSize="small" />
+        Profile
+      </MenuItem>
+      <MenuItem
+        onClick={() => {
+          navigate("/Dashboard");
+          closeUserMenu();
+        }}
+        sx={{
+          gap: 2,
+        }}
+      >
+        <SupervisedUserCircleRounded fontSize="small" />
+        Dashboard
       </MenuItem>
 
       <MenuItem
@@ -34,8 +57,11 @@ const UserMenuBar = () => {
           localStorage.removeItem("accessToken");
           closeUserMenu();
         }}
+        sx={{
+          gap: 2,
+        }}
       >
-        Logout
+        <Logout fontSize="small" /> Logout
       </MenuItem>
     </Menu>
   );

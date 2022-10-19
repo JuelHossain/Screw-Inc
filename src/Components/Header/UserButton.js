@@ -9,10 +9,10 @@ import UserMenuBar from "./UserMenuBar";
 const UserButton = () => {
   const [user] = useAuthState(auth);
   return user ? (
-    <Box>
-      <Button className="hidden md:flex" variant="" component={Link} to={"/Dashboard"}>
-        DashBoard
-      </Button>
+    <Box className="flex items-center gap-2">
+      <p className=" uppercase  font-bold hidden md:flex">
+        {user?.displayName}
+      </p>
       <UserAvatar />
       <UserMenuBar />
     </Box>
