@@ -5,6 +5,7 @@ import * as React from "react";
 import { Outlet } from "react-router-dom";
 import {
   AdminNavList,
+  UiNavList,
   UserNavList,
 } from "../../Components/DashBoard/Drawer/AdminNavList/AdminNavList";
 import Drawerheader from "../../Components/DashBoard/Drawer/Drawerheader";
@@ -22,9 +23,8 @@ export default function DashBoard() {
     return <Loading />;
   }
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex" }} >
       <CssBaseline />
-      {/* appbar  */}
       <AppBar position="fixed" open={drawer}>
         <ToolBar />
       </AppBar>
@@ -32,10 +32,11 @@ export default function DashBoard() {
       <Drawer variant="permanent" open={drawer}>
         <Drawerheader />
         <Divider />
-        {/* admin nav list  */}
         {admin ? <AdminNavList open={drawer} /> : <UserNavList open={drawer} />}
+        <Divider />
+        <UiNavList open={drawer} />
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
         <Outlet />
       </Box>
     </Box>

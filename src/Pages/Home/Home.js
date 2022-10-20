@@ -14,7 +14,7 @@ const Home = () => {
       <Container maxWidth="xl">
         <Banner />
         <Business />
-        <Products size={6} />
+        <Products size={4} />
         {/* <Discount /> */}
         <Reviews size={6} />
         <Feedback />

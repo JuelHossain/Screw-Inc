@@ -4,7 +4,7 @@ import React from 'react';
 
 const BusinessCard = ({icon,title,text}) => {
     return (
-      <Box sx={{ p: 3, flex: 1 }}>
+      <Box sx={{ p: 3 }} className="border h-full">
         <Stack sx={{ alignItems: "center" }} spacing={2}>
           {icon}
           <Typography variant="h4">{title}</Typography>
@@ -15,12 +15,17 @@ const BusinessCard = ({icon,title,text}) => {
 }
 const Business = () => {
     return (
-      <Container maxWidth={"lg"} sx={{ my: 10, textAlign: "center" }} mx="auto">
+      <Container
+        maxWidth={"xl"}
+        sx={{ my: 5, textAlign: "center" }}
+        mx="auto"
+        className="py-5 sm:py-10"
+      >
         <Typography variant="h4">What We Do?</Typography>
         <Divider sx={{ mx: 30, my: 2 }} />
 
-        <Grid container spacing={2} marginX={"auto"} justifyContent="center">
-          <Grid item xs={12} sm={6} md={4} lg={3}>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6} xl={4}>
             <BusinessCard
               icon={<Sell sx={{ fontSize: 50 }} color="primary" />}
               title={"We Sell The Best Tools."}
@@ -29,7 +34,7 @@ const Business = () => {
               }
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
+          <Grid item xs={12} md={6} xl={4}>
             <BusinessCard
               icon={<Factory sx={{ fontSize: 50 }} color="primary" />}
               title={"We Manufacture Our Tools"}
@@ -39,7 +44,7 @@ const Business = () => {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4} lg={3}>
+          <Grid item xs={12} md={6} xl={4}>
             <BusinessCard
               icon={<PriceChange sx={{ fontSize: 50 }} color="primary" />}
               title={"Our Product Price Is Cheaper"}

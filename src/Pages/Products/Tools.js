@@ -19,9 +19,7 @@ export default function Tools({products}) {
     return <Loading/>
   }
   return (
-    <main>
-      <Container sx={{ py: 8 }} maxWidth="xl">
-        <Grid container spacing={2}>
+        <Grid container spacing={4}>
           {products?.map((product) => (
             <Grid item key={product._id} xs={12} sm={6} md={4} lg={3}>
               <Card
@@ -94,7 +92,5 @@ export default function Tools({products}) {
             </Grid>
           ))}
         </Grid>
-      </Container>
-    </main>
   );
 }
